@@ -75,5 +75,8 @@ return [
     'default_delete_success' => ':module Deleted successfully!',
     'default_error' => 'Problem with the :action :module!',
 
+    // Promo
+    'promo_voucher_managment' => 'Promo Voucher Managment'
+
 
 ];

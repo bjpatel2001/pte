@@ -30,6 +30,16 @@
                                 </ul>
                             </li>
                         @endif
+
+                          <li class="parent {{$quotationManagementTab or ''}}" title="{{trans('app.promo_voucher_managment')}}"><a href="#"><i
+                                        class="icon mdi mdi-quote mdi-18px"></i><span>{{trans('app.promo_voucher_managment')}}</span></a>
+                            <ul class="sub-menu">
+                                <li class="{{$promoTab or ''}}">
+                                    <a href="{{url('admin/promo/list')}}">{{trans('app.promo_voucher_managment')}}</a>
+                                </li>
+                           </ul>
+                        </li>
+
                         <li title="Reports"><a href="{{url('/maintanance')}}"><i class="icon fa fa-file-text-o"
                                                                                  aria-hidden="true"></i><span>{{trans('app.reports')}}</span></a>
                         </li>
