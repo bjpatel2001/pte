@@ -26,5 +26,11 @@ return [
         "email",
         "status"
     ],
+
+    "promoDataTableFieldArray" => [
+
+        "voucher_code",
+        ""
+    ],
 ];
 

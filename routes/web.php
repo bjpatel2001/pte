@@ -74,18 +74,18 @@ Route::group(array('prefix' => 'user','Permission'=>"user_management", 'as' => '
 });
 
 
-Route::group(['prefix' => 'promo'], function () {
+Route::group(['prefix' => 'voucher'], function () {
 
-    Route::any('/list', 'Admin\PromoController@index')->name('promoPromo');
-    Route::get('/add/{flag?}', 'Admin\PromoController@create')->name('createPromo');
-    Route::get('/profile', 'Admin\PromoController@profile');
-    Route::get('/edit/{id}/{flag?}', 'Admin\PromoController@edit')->name('editPromo');
-    Route::get('/log/{id}', 'Admin\PromoController@log')->name('logPromo');
-    Route::post('/delete', 'Admin\PromoController@delete')->name('deletePromo');
-    Route::post('/store', 'Admin\PromoController@store')->name('storePromo');
-    Route::post('/update', 'Admin\PromoController@update')->name('updatePromo');
-    Route::post('/change_status', 'Admin\PromoController@changeStatus');
-    Route::post('/datatable', 'Admin\PromoController@datatable');
+    Route::any('/list', 'PromoController@index')->name('promoPromo');
+    Route::get('/add/{flag?}', 'PromoController@create')->name('createPromo');
+    Route::get('/profile', 'PromoController@profile');
+    Route::get('/edit/{id}/{flag?}', 'PromoController@edit')->name('editPromo');
+    Route::get('/log/{id}', 'PromoController@log')->name('logPromo');
+    Route::post('/delete', 'PromoController@delete')->name('deletePromo');
+    Route::post('/store', 'PromoController@store')->name('storePromo');
+    Route::post('/update', 'PromoController@update')->name('updatePromo');
+    Route::post('/change_status', 'PromoController@changeStatus');
+    Route::post('/datatable', 'PromoController@datatable');
     
 
 });

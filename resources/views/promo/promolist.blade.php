@@ -1,6 +1,6 @@
 @extends('layouts.common')
 @section('pageTitle')
-    {{__('app.default_list_title',["app_name" => __('app.app_name'),"module"=> __('app.user')])}}
+    {{__('app.default_list_title',["app_name" => __('app.app_name'),"module"=> __('app.voucher')])}}
 @endsection
 @push('externalCssLoad')
 <link rel="stylesheet" href="{{url('css/plugins/jquery.datetimepicker.css')}}" type="text/css"/>
@@ -11,10 +11,10 @@
 @section('content')
     <div class="be-content">
         <div class="page-head">
-            <h2>{{trans('app.user')}} Management</h2>
+            <h2>{{trans('app.voucher')}} Management</h2>
             <ol class="breadcrumb">
                 <li><a href="{{url('/dashboard')}}">{{trans('app.admin_home')}}</a></li>
-                <li class="active">{{trans('app.user')}} Listing</li>
+                <li class="active">{{trans('app.voucher')}} Listing</li>
             </ol>
         </div>
         <div class="main-content container-fluid">
@@ -38,9 +38,9 @@
                                    style="margin-left: 10px;">Reset</a>
                             </div>
                             <div class="addreport pull-right">
-                                <a href="{{url('/user/add')}}">
+                                <a href="{{url('/voucher/add')}}">
                                     <button class="btn btn-space btn-primary"><i
-                                                class="icon mdi mdi-plus "></i> {{trans('app.add')}} {{trans('app.user')}}
+                                                class="icon mdi mdi-plus "></i> {{trans('app.add')}} {{trans('app.voucher')}}
                                     </button>
                                 </a>
                             </div>
@@ -71,11 +71,7 @@
                                         <thead>
 
                                         <tr>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th class="no-sort">{{trans('app.user')}} Role</th>
-                                            <th>Email Address</th>
-                                            <th>status</th>
+                                            <th>Voucher Code</th>
                                             <th class="no-sort">Action</th>
                                         </tr>
 
@@ -83,34 +79,10 @@
                                         <thead>
                                         <tr>
                                             <th>
-                                                <input type="text" name="filter[first_name]" style="width: 80px; id="
-                                                       first_name" value="" />
+                                                <input type="text" name="filter[voucher_code]" style="width: 80px;" id="
+                                                       voucher_code" value="" />
                                             </th>
-                                            <th>
-                                                <input type="text" name="filter[last_name]" style="width: 80px;" id="last_name" value="" />
-                                            </th>
-                                            <th>
-                                                <select name="filterSelect[role_id]" id="role_id" style="width: 80px;">
-                                                    <option value="">{{trans('app.select')}}</option>
-                                                    @if(count($roleData) > 0)
-                                                        @foreach($roleData as $row)
-                                                            <option value="{{$row->id}}">{{$row->code}}</option>
-                                                        @endforeach
-                                                    @endif
-
-                                                </select>
-                                            </th>
-                                            <th>
-                                                <input type="text" name="filter[email]" style="width: 80px; id=" email"
-                                                value="" />
-                                            </th>
-                                            <th>
-                                                <select name="filterSelect[status]" id="status" style="width: 80px;">
-                                                    <option value="">{{trans('app.select')}}</option>
-                                                    <option value="1">{{trans('app.active')}}</option>
-                                                    <option value="0">{{trans('app.inactive')}}</option>
-                                                </select>
-                                            </th>
+                                      
                                             <th></th>
                                         </tr>
                                         </thead>
@@ -132,10 +104,10 @@
 @push('externalJsLoad')
 <script src="{{url('js/plugins/jquery.datetimepicker.js')}}" type="text/javascript"></script>
 <script src="{{url('js/appDatatable.js')}}"></script>
-<script src="{{url('js/modules/user.js')}}"></script>
+<script src="{{url('js/modules/promo.js')}}"></script>
 @endpush
 @push('internalJsLoad')
 <script>
-    app.user.init();
+    app.promo.init();
 </script>
 @endpush

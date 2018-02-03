@@ -14,7 +14,7 @@ return [
     */
 
      //Translation of General words
-     'app_name' => 'Default',
+     'app_name' => 'Pte Promocode',
      'change_password' => ':app_name | Change Password',
      'admin_home' => 'Dashboard',
      'management' => 'Management',
@@ -76,7 +76,8 @@ return [
     'default_error' => 'Problem with the :action :module!',
 
     // Promo
-    'promo_voucher_managment' => 'Promo Voucher Managment'
+    'voucher_managment' => 'Voucher Managment',
+    'voucher' => 'Voucher'
 
 
 ];

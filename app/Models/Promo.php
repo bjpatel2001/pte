@@ -2,47 +2,52 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Models\PromoLog;
-use App\Models\Machine;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Auth;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Promo extends Model
+
+
+class Promo extends Authenticatable
 {
+    use Notifiable;
+   
     protected $table = 'tbl_promo_voucher';
     protected $primaryKey = 'id';
-    use SoftDeletes;
-
-
-    public function Machine()
-    {
-        return $this->hasMany('App\Models\Machine','promo_id','id')->where('status',1);
-    }
+    
 
     /**
-     * Get all Promos getCollection
+     * The attributes that are mass assignable.
      *
-     * @param array $models
+     * @var array
+     */
+    protected $fillable = [
+        'voucher_code', 'status', 'created_by', 'updated_by'
+    ];
+
+    
+
+    /**
+     * Get all User getCollection
+     *
      * @return mixed
      */
-    public function getCollection(array $models = [])
+    public function getCollection()
     {
-        $promo = Promo::with('Machine')->select('tbl_promo_voucher.*');
-        if(isset($models['check_status']) && $models['check_status'] == 1){
-            $promo->where('status',1);
-        }
+
+         $promo = Promo::select('tbl_promo_voucher.*');
+            $promo->where('status',0);
         return $promo->get();
     }
 
     /**
-     * Get all Promo with promo & User relationship
+     * Get all User with role and ParentUser relationship
      *
      * @return mixed
      */
     public function getDatatableCollection()
     {
-        return Promo::select('tbl_promo_voucher.*');
+       return Promo::select('tbl_promo_voucher.*')->where('status',0);
     }
 
     /**
@@ -58,18 +63,6 @@ class Promo extends Model
     }
 
     /**
-    * get Machine By promo wise
-    *
-    * @param mixed $id
-    *
-    * @return response
-    */
-        public function getProductByPromoId($id)
-        {
-            return Machine::where('promo_id',$id)->select('machine_name','id')->get()->toArray();
-        }
-
-    /**
      * Scope a query to get all data
      *
      * @param  \Illuminate\Database\Eloquent\Builder $query
@@ -81,52 +74,53 @@ class Promo extends Model
         return $query->skip($request->start)->take($request->length)->get();
     }
 
-    /*
-     *    scopeGetFilteredData from App/Models/Promo
-     *   get filterred promos
+    /**
+     * scopeGetFilteredData from App/Models/Promo
+     * get filterred promos
      *
-     *  @param  object $query
-     *  @param  \Illuminate\Http\Request $request
-     *  @return mixed
-     * */
+     * @param  object $query
+     * @param  \Illuminate\Http\Request $request
+     * @return mixed
+     */
     public function scopeGetFilteredData($query, $request)
     {
         $filter = $request->filter;
         $Datefilter = $request->filterDate;
         $filterSelect = $request->filterSelect;
-        /*
+
+        /**
          * @param string $filter  text type value
          * @param string $Datefilter  date type value
          * @param string $filterSelect select value
          *
-         *  @return mixed
-         * */
+         * @return mixed
+         */
         return $query->Where(function ($query) use ($filter, $Datefilter, $filterSelect) {
-                if (count($filter) > 0) {
-                    foreach ($filter as $key => $value) {
-                        if ($value != "") {
-                            $query->where($key, 'LIKE', '%' . $value . '%');
-                        }
+            if (count($filter) > 0) {
+                foreach ($filter as $key => $value) {
+                    if ($value != "") {
+                        $query->where($key, 'LIKE', '%' . trim($value) . '%');
                     }
                 }
+            }
 
-                if (count($Datefilter) > 0) {
-                    foreach ($Datefilter as $dtkey => $dtvalue) {
-                        if ($dtvalue != "") {
-                            $query->where($dtkey, 'LIKE', '%' . date('Y-m-d', strtotime($dtvalue)) . '%');
-                        }
+            if (count($Datefilter) > 0) {
+                foreach ($Datefilter as $dtkey => $dtvalue) {
+                    if ($dtvalue != "") {
+                        $query->where($dtkey, 'LIKE', '%' . date('Y-m-d', strtotime(trim($dtvalue))) . '%');
                     }
                 }
+            }
 
-                if (count($filterSelect) > 0) {
-                    foreach ($filterSelect as $Sekey => $Sevalue) {
-                        if ($Sevalue != "") {
-                            $query->whereRaw('FIND_IN_SET(' . $Sevalue . ',' . $Sekey . ')');
-                        }
+            if (count($filterSelect) > 0) {
+                foreach ($filterSelect as $Sekey => $Sevalue) {
+                    if ($Sevalue != "") {
+                        $query->whereRaw('FIND_IN_SET(' . trim($Sevalue) . ',' . $Sekey . ')');
                     }
                 }
+            }
 
-            });
+        });
 
     }
 
@@ -165,32 +159,32 @@ class Promo extends Model
      */
     public function addPromo(array $models = [])
     {
-        $promoLog = new PromoLog();
         if (isset($models['id'])) {
             $promo = Promo::find($models['id']);
-            $promoLog->action = "Update";
         } else {
             $promo = new Promo;
-            $promoLog->created_by = $promo->created_by = Auth::id();
-            $promoLog->action = "Add";
+            $promo->created_at = date('Y-m-d H:i:s');
+            $promo->created_by = Auth::user()->id;
         }
 
-        $promoLog->promo_name = $promo->promo_name = $models['promo_name'];
-        $promoLog->created_by = $promoLog->updated_by = $promo->updated_by = Auth::id();
+       
+        $promo->voucher_code = $models['voucher_code'];
+        
         if (isset($models['status'])) {
-            $promoLog->status = $promo->status = $models['status'];
+            $promo->status = $models['status'];
         } else {
-            $promoLog->status = $promo->status = 0;
+            $promo->status = 0;
         }
 
+        $promo->updated_by = Auth::user()->id;
+        $promo->updated_at = date('Y-m-d H:i:s');
         $promoId = $promo->save();
-        $promoLog->promo_id = $promo->id;
-        $promoLog->save();
 
-        if ($promoId)
-            return true;
-        else
+        if ($promoId) {
+            return $promo;
+        } else {
             return false;
+        }
     }
 
     /**
@@ -213,17 +207,11 @@ class Promo extends Model
      */
     public function updateStatus(array $models = [])
     {
-        $promoLog = new PromoLog();
-
         $promo = Promo::find($models['id']);
-        $promoLog->status = $promo->status = $models['status'];
-        $promoLog->created_by = $promoLog->updated_by = $promo->updated_by = Auth::id();
-        $promoLog->action = "Change Password";
+        $promo->status = $models['status'];
+        $promo->updated_by = Auth::user()->id;
+        $promo->updated_at = date('Y-m-d H:i:s');
         $promoId = $promo->save();
-        $promoLog->promo_id = $promo->id;
-        $promoLog->save();
-
-
         if ($promoId)
             return true;
         else
@@ -239,17 +227,7 @@ class Promo extends Model
      */
     public function deletePromo($id)
     {
-        $promoData = Machine::where('promo_id',$id)->first();
-        if(count($promoData)>0){
-            return false;
-        }
-        $promoLog = new PromoLog();
-        $promoLog->created_by = $promoLog->updated_by = Auth::id();
-        $promoLog->action = "Delete";
         $delete = Promo::where('id', $id)->delete();
-        $promoLog->promo_id = $id;
-        $promoLog->save();
-
         if ($delete)
             return true;
         else
@@ -257,16 +235,5 @@ class Promo extends Model
 
     }
 
-    /**
-     * get Machine By promo wise
-     *
-     * @param mixed $id
-     *
-     * @return response
-     */
-    public function getMachineByPromo($id)
-    {
-        return Promo::with('Machine')->where('id',$id)->get();
-    }
 
 }

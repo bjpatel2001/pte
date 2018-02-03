@@ -87,7 +87,8 @@
                                                        first_name" value="" />
                                             </th>
                                             <th>
-                                                <input type="text" name="filter[last_name]" style="width: 80px;" id="last_name" value="" />
+                                                <input type="text" name="filter[last_name]" style="width: 80px; id="
+                                                       last_name" value="" />
                                             </th>
                                             <th>
                                                 <select name="filterSelect[role_id]" id="role_id" style="width: 80px;">
