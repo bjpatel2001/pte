@@ -90,3 +90,21 @@ Route::group(['prefix' => 'voucher'], function () {
 
 });
 
+
+Route::group(['prefix' => 'enquiry'], function () {
+
+    Route::any('/list', 'EnquiryController@index');
+    Route::post('/datatable', 'EnquiryController@datatable');
+});
+
+Route::group(['prefix' => 'prize'], function () {
+    Route::get('/add', 'PrizeController@create');
+    Route::post('/store', 'PrizeController@store');
+    Route::post('/update', 'PrizeController@update');
+});
+
+Route::group(['prefix' => 'detail'], function () {
+    Route::get('/add', 'DetailController@create');
+    Route::post('/store-prize', 'DetailController@storePrize');
+    Route::post('/store-title', 'DetailController@storeTitle');
+ });

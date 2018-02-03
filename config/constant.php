@@ -32,5 +32,14 @@ return [
         "voucher_code",
         ""
     ],
+    "enquiryDataTableFieldArray" => [
+
+        "email",
+        "name",
+        "mobile",
+        "number_of_voucher",
+        "rate",
+        "payment_request_id",
+    ],
 ];
 

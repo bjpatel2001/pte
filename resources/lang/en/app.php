@@ -77,7 +77,19 @@ return [
 
     // Promo
     'voucher_managment' => 'Voucher Managment',
-    'voucher' => 'Voucher'
+    'voucher' => 'Voucher',
+
+    //Enquiry
+    'enquiry_managment' => 'Enquiry Managment',
+    'enquiry' => 'Enquiry',
+
+    //Prize Managment
+    'prize_managment' => 'Prize Managment',
+    'prize' => 'Prize',
+
+    //Front Detail Managment
+    'detail_managment' => 'Front Detail Managment',
+    'detail' => 'Detail'
 
 
 ];
