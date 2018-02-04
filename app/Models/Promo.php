@@ -209,11 +209,10 @@ class Promo extends Authenticatable
     {
         $promo = Promo::find($models['id']);
         $promo->status = $models['status'];
-        $promo->updated_by = Auth::user()->id;
         $promo->updated_at = date('Y-m-d H:i:s');
         $promoId = $promo->save();
         if ($promoId)
-            return true;
+            return $promo;
         else
             return false;
 
@@ -243,6 +242,17 @@ class Promo extends Authenticatable
     public function getUnusedVoucher()
     {
         $return = Promo::where('status', 0)->count();
+        return $return;
+    }
+
+    /**
+     * Get the count of unused voucher
+     * @param $count
+     * @return $return
+     */
+    public function getVoucherByCount($count)
+    {
+        $return = Promo::where('status', 0)->take($count)->get();
         return $return;
     }
 

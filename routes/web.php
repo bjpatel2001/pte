@@ -38,6 +38,7 @@ Route::get('/dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@in
 Route::group(['prefix' => 'pte'], function () {
     //Route::post('/payment', 'PteController@payment');
     Route::post('/payment-request', 'PteController@createPaymentRequest');
+    Route::post('/redirect', 'PteController@checkPaymentStatus');
 });
 /*
  *  Role Management
