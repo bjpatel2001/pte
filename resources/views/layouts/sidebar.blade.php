@@ -10,7 +10,7 @@
                                         class="icon mdi mdi-home"></i><span>{{trans('app.admin_home')}}</span></a>
                         </li>
                         @if(in_array("master_manage",$userPermission))
-                            {{--<li class="parent {{$masterManagementTab or ''}}" title="Master Managemet"><a href="#"><i
+                            <li class="parent {{$masterManagementTab or ''}}" title="Master Managemet"><a href="#"><i
                                             class="icon mdi mdi-account mdi-18px"></i><span>{{trans('app.master_managemet')}}</span></a>
                                 <ul class="sub-menu">
                                     @if(in_array("user_management",$userPermission))
@@ -23,12 +23,12 @@
                                             <a href="{{url('/role/list')}}">{{trans('app.role')}} {{trans('app.management')}}</a>
                                         </li>
                                     @endif
-                                   --}}{{-- <li class="{{$permissionTab or ''}}">
+                                    <li class="{{$permissionTab or ''}}">
                                         <a href="{{url('/permission/list')}}">{{trans('app.permission')}} {{trans('app.management')}}</a>
-                                    </li>--}}{{--
+                                    </li>
 
                                 </ul>
-                            </li>--}}
+                            </li>
                         @endif
 
                           <li class="parent {{$promoManagementTab or ''}}" title="{{trans('app.voucher_managment')}}"><a href="#"><i
@@ -63,6 +63,17 @@
                             <ul class="sub-menu">
                                 <li class="{{$detailTab or ''}}">
                                     <a href="{{url('detail/add')}}">{{trans('app.detail_managment')}}</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="parent {{$OfflinePaymentManagementTab or ''}}" title="{{trans('app.offline_payment_managment')}}"><a href="#"><i
+                                        class="icon mdi mdi-quote mdi-18px"></i><span>{{trans('app.offline_payment_managment')}}</span></a>
+                            <ul class="sub-menu">
+                                <li class="{{$addNewAgentPaymentTab or ''}}">
+                                    <a href="{{url('offline/add-new-agent')}}">{{trans('app.add_new_agent_payment')}}</a>
+                                </li>
+                                <li class="{{$addExistingAgentPaymentTab or ''}}">
+                                    <a href="{{url('offline/list')}}">Add exiting agent payment</a>
                                 </li>
                             </ul>
                         </li>

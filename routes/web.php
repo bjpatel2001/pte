@@ -108,3 +108,13 @@ Route::group(['prefix' => 'detail'], function () {
     Route::post('/store-prize', 'DetailController@storePrize');
     Route::post('/store-title', 'DetailController@storeTitle');
  });
+
+Route::group(['prefix' => 'offline'], function () {
+    Route::any('/list', 'OfflinePaymentController@index');
+    Route::get('/add-new-agent', 'OfflinePaymentController@addNewAgentPayment');
+    Route::get('/add-existing-agent-payment', 'OfflinePaymentController@addExistingAgentPayment');
+    Route::post('/store-new-agent-payment', 'OfflinePaymentController@storeNewAgentPayment');
+    Route::post('/store-existing-agent-payment', 'OfflinePaymentController@storeExistingAgentPayment');
+    Route::post('/datatable', 'OfflinePaymentController@datatable');
+    Route::post('/delete', 'OfflinePaymentController@delete');
+});

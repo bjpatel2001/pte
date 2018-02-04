@@ -89,7 +89,13 @@ return [
 
     //Front Detail Managment
     'detail_managment' => 'Front Detail Managment',
-    'detail' => 'Detail'
+    'detail' => 'Detail',
+
+    //Front Detail Managment
+    'offline_payment_managment' => 'Offline Payment',
+    'offline' => 'Offline',
+    'add_new_agent_payment' => 'Add new agent payment',
+    'add_existing_agent_payment' => 'Add existing agent payment'
 
 
 ];

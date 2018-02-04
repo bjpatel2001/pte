@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => 'contact@mobiosolutions.com',
-        'name' => 'IMS One World',
+        'address' => 'bjpatel2001@gmail.com',
+        'name' => 'PteVouchercode.com',
     ],
 
     /*

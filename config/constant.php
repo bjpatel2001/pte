@@ -41,5 +41,13 @@ return [
         "rate",
         "payment_request_id",
     ],
+
+    "offlinePaymentDataTableFieldArray" => [
+
+        "email",
+        "name",
+        "mobile",
+        ""
+    ],
 ];
 

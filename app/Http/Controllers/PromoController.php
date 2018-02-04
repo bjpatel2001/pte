@@ -97,7 +97,7 @@ class PromoController extends Controller
         foreach ($promoData as $promoData) {
             $row = array();
             $row[] = $promoData->voucher_code;
-             $row[] = view('datatable.action', ['module' => "voucher",'type' => $promoData->id, 'id' => $promoData->id])->render();
+            $row[] = view('datatable.action', ['module' => "voucher",'type' => $promoData->id, 'id' => $promoData->id])->render();
             $appData[] = $row;
         }
 
