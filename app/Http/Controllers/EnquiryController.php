@@ -88,14 +88,14 @@ class EnquiryController extends Controller
          */
         $enquiryData = $enquiryData->GetEnquiryData($request);
         $appData = array();
-        foreach ($enquiryData as $enquiryData) {
+        foreach ($enquiryData as $enquirysData) {
             $row = array();
-            $row[] = $enquiryData->email;
-            $row[] = $enquiryData->name;
-            $row[] = $enquiryData->mobile;
-            $row[] = $enquiryData->number_of_voucher;
-            $row[] = $enquiryData->rate;
-            $row[] = $enquiryData->payment_request_id;
+            $row[] = $enquirysData->email;
+            $row[] = $enquirysData->name;
+            $row[] = $enquirysData->mobile;
+            $row[] = $enquirysData->number_of_voucher;
+            $row[] = $enquirysData->rate;
+            $row[] = $enquirysData->payment_request_id;
             $appData[] = $row;
         }
 

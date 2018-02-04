@@ -77,7 +77,7 @@
                                 <div class="col-sm-6 col-md-8 savebtn">
                                     <p class="text-right">
                                         <button type="submit" class="btn btn-space btn-info btn-lg">{{trans('app.add')}} Payment</button>
-                                        <a href="{{url('/offline/add-existing-agent')}}" class="btn btn-space btn-danger btn-lg">Cancel</a>
+                                        <a href="{{url('/offline/add-existing-agent-payment')}}" class="btn btn-space btn-danger btn-lg">Cancel</a>
                                     </p>
                                 </div>
                             </form>

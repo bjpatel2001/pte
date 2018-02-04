@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Auth;
+use App\Mail\EnquiryMail;
+use Mail;
 
 
 
@@ -154,7 +156,7 @@ class Enquiry extends Authenticatable
      * Add & update Enquiry addEnquiry
      *
      * @param array $models
-     * @return boolean true | false
+     * @return $enquiry
      */
     public function addEnquiry(array $models = [])
     {
@@ -175,8 +177,8 @@ class Enquiry extends Authenticatable
         $enquiry->updated_by = Auth::user()->id;
         $enquiry->updated_at = date('Y-m-d H:i:s');
         $enquiryId = $enquiry->save();
-
         if ($enquiryId) {
+            Mail::send(new EnquiryMail($enquiry));
             return $enquiry;
         } else {
             return false;

@@ -67,4 +67,14 @@ class LoginController extends Controller
         }
     }
 
+    /**
+     * Index front page
+     *
+     * @return view
+     */
+    public function welcome()
+    {
+        return view('welcome');
+    }
+
 }

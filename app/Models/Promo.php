@@ -235,5 +235,15 @@ class Promo extends Authenticatable
 
     }
 
+    /**
+     * Get the count of unused voucher
+     *
+     * @return $return
+     */
+    public function getUnusedVoucher()
+    {
+        $return = Promo::where('status', 0)->count();
+        return $return;
+    }
 
 }
