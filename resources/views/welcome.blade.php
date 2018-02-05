@@ -52,7 +52,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form action="{{url('/pte/payment-request')}}" name="app_add_form" id="app_form" style="border-radius: 0px;" method="post" class="form-horizontal group-border-dashed">
+                            <form action="{{url('payment-request')}}" name="app_add_form" id="app_form" style="border-radius: 0px;" method="post" class="form-horizontal group-border-dashed">
 
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Name<span class="error">*</span></label>
