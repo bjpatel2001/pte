@@ -7,15 +7,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Auth;
 
 
-
-
 class PendingVoucher extends Authenticatable
 {
     use Notifiable;
-   
+
     protected $table = 'tbl_pendingvoucher';
     protected $primaryKey = 'id';
-    
+
 
     /**
      * The attributes that are mass assignable.
@@ -25,7 +23,6 @@ class PendingVoucher extends Authenticatable
     protected $fillable = [
         'enquiry_id', 'voucher_id'
     ];
-
 
 
     /**
