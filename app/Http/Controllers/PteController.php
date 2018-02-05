@@ -92,6 +92,7 @@ class PteController extends Controller
         $current_prize_data = $this->prize->getFirstPrize();
         if (count($current_prize_data) > 0) {
             $current_prize = $current_prize_data->rate;
+            $request_data['rate'] = $current_prize_data->rate;
             $request_data['amount'] = $buying_quantity * $current_prize;
         } else {
             $request->session()->flash('alert-danger', 'Voucher prize is not available please visit after some time');
