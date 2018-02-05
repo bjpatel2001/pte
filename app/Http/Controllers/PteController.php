@@ -113,9 +113,9 @@ class PteController extends Controller
             'amount' => $request_data['amount'],
             'phone' => $request_data['mobile'],
             'buyer_name' => $request_data['name'],
-            'redirect_url' => 'http://ptetutorialsonline.com/redirect',
+            'redirect_url' => 'http://ptetutorialsonline.com/pte/redirect',
             'send_email' => false,
-            'webhook' => 'http://ptetutorialsonline.com/webhook',
+            'webhook' => 'http://ptetutorialsonline.com/pte/webhook',
             'send_sms' => false,
             'email' => $request_data['email'],
             'allow_repeated_payments' => false
