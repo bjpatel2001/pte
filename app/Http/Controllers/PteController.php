@@ -106,8 +106,8 @@ class PteController extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
         curl_setopt($ch, CURLOPT_HTTPHEADER,
-            array("X-Api-Key:test_f187bda4907267bcdc02762a805",
-                "X-Auth-Token:test_2d3f61f7a3ee16e6790d90fa3aa"));
+            array("X-Api-Key:4b3ab11a54e5b85da7893b10f4fde169",
+                "X-Auth-Token:01f2f923def1bd1ca18a6e5a2543f3f8"));
         $payload = Array(
             'purpose' => 'PTE Voucher Payment',
             'amount' => $request_data['amount'],
@@ -128,6 +128,9 @@ class PteController extends Controller
         $result = json_decode($response, true);
         if(isset($result["payment_request"]["id"])) {
             $request_data['payment_request_id'] = $result["payment_request"]["id"];
+        }else {
+            $request->session()->flash('alert-danger', 'Problem occurred while creating payment id please try after some time');
+            return redirect('/')->withInput(); 
         }
 
 
@@ -179,8 +182,8 @@ class PteController extends Controller
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
                 curl_setopt($ch, CURLOPT_HTTPHEADER,
-                    array("X-Api-Key:test_f187bda4907267bcdc02762a805",
-                        "X-Auth-Token:test_2d3f61f7a3ee16e6790d90fa3aa"));
+                    array("X-Api-Key:4b3ab11a54e5b85da7893b10f4fde169",
+                        "X-Auth-Token:01f2f923def1bd1ca18a6e5a2543f3f8"));
 
                 $response = curl_exec($ch);
                 curl_close($ch);
