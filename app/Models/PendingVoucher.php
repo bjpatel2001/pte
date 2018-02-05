@@ -11,7 +11,7 @@ class PendingVoucher extends Authenticatable
 {
     use Notifiable;
 
-    protected $table = 'tbl_pendingvoucher';
+    protected $table = 'tbl_pending_voucher_confirmation';
     protected $primaryKey = 'id';
 
 
