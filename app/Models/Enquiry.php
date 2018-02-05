@@ -171,10 +171,10 @@ class Enquiry extends Authenticatable
         $enquiry->state = $models['state'];
         $enquiry->payment_request_id = $models['payment_request_id'];
         $enquiry->created_at = date('Y-m-d H:i:s');
-        $enquiry->created_by = Auth::user()->id;
+        $enquiry->created_by = 1;
 
 
-        $enquiry->updated_by = Auth::user()->id;
+        $enquiry->updated_by = 1;
         $enquiry->updated_at = date('Y-m-d H:i:s');
         $enquiryId = $enquiry->save();
         if ($enquiryId) {
