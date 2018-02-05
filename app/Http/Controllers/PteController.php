@@ -125,6 +125,7 @@ class PteController extends Controller
         curl_close($ch);
 
         $result = json_decode($response, true);
+        dd($result);
         $request_data['payment_request_id'] = $result["payment_request"]["id"];
 
         //Insert into enquiry
