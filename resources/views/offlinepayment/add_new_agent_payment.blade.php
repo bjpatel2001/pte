@@ -73,9 +73,16 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label">State<span class="error">*</span></label>
+                                    <label class="col-sm-4 control-label">State <span class="error">*</span></label>
                                     <div class="col-sm-6 col-md-4">
-                                        <input type="text" name="state" id="state" placeholder="State" class="form-control input-sm required" value="{{old('state')}}" />
+                                        <select class="form-control input-sm required" name="state" id="state">
+                                            <option value="">State</option>
+                                            @if(count($state) > 0)
+                                                @foreach($state as $row)
+                                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
                                     </div>
                                 </div>
 

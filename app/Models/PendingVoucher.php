@@ -86,9 +86,9 @@ class PendingVoucher extends Authenticatable
      * @param int $id
      * @return boolean true | false
      */
-    public function deletePendingVoucher($id)
+    public function deletePendingVoucher($id,$field)
     {
-        $delete = Promo::where('id', $id)->delete();
+        $delete = Promo::where($field, $id)->delete();
         if ($delete)
             return true;
         else

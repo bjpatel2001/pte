@@ -13,9 +13,21 @@
 
 Auth::routes();
 Route::get('/', 'Auth\LoginController@welcome')->name('welcome');
+Route::get('/how-to-book', 'Auth\LoginController@howToBook');
+Route::get('/pte-faq', 'Auth\LoginController@pteFaq');
+Route::get('/refund-policy', 'Auth\LoginController@refundPolicy');
+Route::get('/contact-us', 'Auth\LoginController@contactUs');
 
 Route::get('/backend', function () {
     return Redirect::to('login');
+});
+/**
+ * Payment Class and controller
+ * */
+Route::group(['prefix' => 'pte'], function () {
+    //Route::post('/payment', 'PteController@payment');
+    Route::post('/payment-request', 'PteController@createPaymentRequest');
+    Route::get('/redirect', 'PteController@checkPaymentStatus');
 });
 
 Auth::routes();
@@ -32,14 +44,7 @@ Route::get('/maintanance', function (){
 Route::get('/dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
 
 
-/**
- * Payment Class and controller
- * */
-Route::group(['prefix' => 'pte'], function () {
-    //Route::post('/payment', 'PteController@payment');
-    Route::post('/payment-request', 'PteController@createPaymentRequest');
-    Route::get('/redirect', 'PteController@checkPaymentStatus');
-});
+
 /*
  *  Role Management
  *  get files from resources/views/role

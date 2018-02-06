@@ -56,7 +56,7 @@ class PteController extends Controller
         $rules = array(
             'name' => 'required',
             'email' => 'required|email',
-            'mobile' => 'required|integer|min:10',
+            'mobile' => 'required|min:10',
             'number_of_voucher' => 'required',
             'state' => 'required'
         );
@@ -80,6 +80,10 @@ class PteController extends Controller
     public function createPaymentRequest(Request $request)
     {
         $request_data = $request->all();
+        $validations = $this->customeValidate($request->all());
+        if ($validations) {
+            return $validations;
+        }
         $buying_quantity = intval($request_data['number_of_voucher']);
         //$addpromo = $this->promo->addPromo($request->all());
         $unused_voucher = $this->promo->getUnusedVoucher();
@@ -232,6 +236,8 @@ class PteController extends Controller
                                     $this->promo->updateStatus($update_voucher_data);
                                 }
 
+                                // For deleteing the entries from the pending_voucher table
+                                $this->pendingVoucher->deletePendingVoucher($enquiry_id,'voucher_id');
                                 //Prepare data for email sending to Customer
 
                                 $customer_email_data = [];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\State;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\OfflinePayment;
@@ -13,16 +14,18 @@ class OfflinePaymentController extends Controller
 {
 
     protected $offlinePayment;
+    public $state;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(OfflinePayment $offlinePayment)
+    public function __construct(OfflinePayment $offlinePayment,State $state)
     {
         $this->middleware(['auth', 'checkRole']);
         $this->offlinePayment = $offlinePayment;
+        $this->state = $state;
 
     }
 
@@ -60,6 +63,7 @@ class OfflinePaymentController extends Controller
          */
         //$data['offlinePaymentData'] = $this->offlinePayment->getCollection();
         $data['offlinePaymentManagementTab'] = "active open";
+        $data['state'] = $this->state->getCollection();
         $data['addNewAgentPaymentTab'] = "active";
         return view('offlinepayment.add_new_agent_payment', $data);
     }
@@ -72,6 +76,7 @@ class OfflinePaymentController extends Controller
     public function addExistingAgentPayment()
     {
         $data['agentData'] = $this->offlinePayment->getCollection();
+        $data['state'] = $this->state->getCollection();
         $data['offlinePaymentManagementTab'] = "active open";
         $data['addExistingAgentPaymentTab'] = "active";
         return view('offlinepayment.add_existing_agent_payment', $data);

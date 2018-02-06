@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\State;
 
 
 class LoginController extends Controller
@@ -74,7 +75,29 @@ class LoginController extends Controller
      */
     public function welcome()
     {
-        return view('welcome');
+        $state_model = new State();
+        $data['state'] = $state_model->getCollection();
+        return view('front.index',$data);
+    }
+
+    public function howToBook()
+    {
+        return view('front.how_to_book');
+    }
+
+    public function pteFaq()
+    {
+        return view('front.pte_faq');
+    }
+
+    public function refundPolicy()
+    {
+        return view('front.refund_policy');
+    }
+
+    public function contactUs()
+    {
+        return view('front.contact_us');
     }
 
 }
