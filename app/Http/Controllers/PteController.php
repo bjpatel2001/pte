@@ -77,7 +77,7 @@ class PteController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function createPaymentRequest(request $request)
+    public function createPaymentRequest(Request $request)
     {
         $request_data = $request->all();
         $buying_quantity = intval($request_data['number_of_voucher']);
@@ -169,7 +169,7 @@ class PteController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function checkPaymentStatus(request $request)
+    public function checkPaymentStatus(Request $request)
     {
         $request_data = $request->all();
         if (isset($request_data['payment_id']) && isset($request_data['payment_request_id'])) {
@@ -245,7 +245,7 @@ class PteController extends Controller
                                 $customer_email_data['type'] = 'customer';
                                 Mail::send(new SuccessMail($customer_email_data));
                                 //Prepare data for admin
-
+                                sleep(5);
                                 $admin_email_data = [];
                                 $admin_email_data['email'] = $email;
                                 $admin_email_data['name'] = $name;
@@ -254,6 +254,7 @@ class PteController extends Controller
                                 $admin_email_data['amount_paid'] = $amount_paid;
                                 $admin_email_data['number_of_voucher'] = $number_of_voucher;
                                 $admin_email_data['instamojo_fee'] = $instamojo_fee;
+                                $admin_email_data['date'] = date('d-m-Y');
                                 $admin_email_data['type'] = 'admin';
                                 $admin_email_data['voucher_to_send'] = implode(",", $voucher_to_send);
                                 Mail::send(new SuccessMail($admin_email_data));
@@ -272,7 +273,7 @@ class PteController extends Controller
                                 $sale_data_entry['rate'] = $rate;
                                 $sale_data_entry['amount_paid'] = $amount_paid;
                                 $sale_data_entry['number_of_voucher'] = $number_of_voucher;
-                                $sale_data = $this->saleData->addSaleData();
+                                $sale_data = $this->saleData->addSaleData($sale_data_entry);
                                 if($sale_data) {
                                     $request->session()->flash('alert-success','Payment done successfully please check your email');
                                     return redirect('/');
