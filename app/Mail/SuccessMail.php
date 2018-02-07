@@ -31,10 +31,10 @@ class SuccessMail extends Mailable
     public function build()
     {
 
-        $address = 'pteacademicvouchercode.com';
+        $address = 'bjpatel2001@gmail.com';
         $name = 'PTEPromoCode.com';
         if($this->successData['type'] == 'admin') {
-            $to = 'pteacademicvouchercode';
+            $to = 'bjpatel2001@gmail.com';
             $view = 'emails.success_admin';
             $subject = 'Success';
         }elseif ($this->successData['type'] == 'customer'){
@@ -42,7 +42,7 @@ class SuccessMail extends Mailable
             $view = 'emails.success_customer';
             $subject = 'PTE Promo Code';
         }elseif($this->successData['type'] == 'send_query'){
-            $to = 'pteacademicvouchercode';
+            $to = 'bjpatel2001@gmail.com';
             $view = 'emails.customer_contactus';
             $subject = 'Customer Enquiry';
         }elseif ($this->successData['type'] == 'mock_test') {

@@ -44,7 +44,7 @@ class EnquiryMail extends Mailable
             $address = 'bjpatel2001@gmail.com';
             $name = 'PTEPromoCode.com';
             $subject = 'Thank you';
-            $to = 'pteacademicvouchercode.com';
+            $to = 'bjpatel2001@gmail.com';
             $view = 'emails.admin_enquiry';
         }
 
