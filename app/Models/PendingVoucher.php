@@ -61,24 +61,7 @@ class PendingVoucher extends Authenticatable
         return PendingVoucher::where($field_name, $id)->first();
     }
 
-    /**
-     * update User Status
-     *
-     * @param array $models
-     * @return boolean true | false
-     */
-    public function updateStatus(array $models = [])
-    {
-        $user = User::find($models['id']);
-        $user->status = $models['status'];
-        $user->updated_at = date('Y-m-d H:i:s');
-        $userId = $user->save();
-        if ($userId)
-            return true;
-        else
-            return false;
 
-    }
 
     /**
      * Delete Voucher
@@ -88,7 +71,7 @@ class PendingVoucher extends Authenticatable
      */
     public function deletePendingVoucher($id,$field)
     {
-        $delete = Promo::where($field, $id)->delete();
+        $delete = PendingVoucher::where($field, $id)->delete();
         if ($delete)
             return true;
         else

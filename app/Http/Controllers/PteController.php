@@ -237,7 +237,7 @@ class PteController extends Controller
                                 }
 
                                 // For deleteing the entries from the pending_voucher table
-                                $this->pendingVoucher->deletePendingVoucher($enquiry_id,'voucher_id');
+                                $this->pendingVoucher->deletePendingVoucher($enquiry_id,'enquiry_id');
                                 //Prepare data for email sending to Customer
 
                                 $customer_email_data = [];
