@@ -33,14 +33,15 @@ class EnquiryMail extends Mailable
      */
     public function build()
     {
+
         if($this->type == 'customer') {
             $to = $this->enquiryData->email;
-            $address = 'pteacademicvouchercode.com';
+            $address = 'Voucher';
             $name = 'PTEPromoCode.com';
             $subject = 'Thank you';
             $view = 'emails.enquiry';
         }elseif ($this->type == 'admin') {
-            $address = 'pteacademicvouchercode.com';
+            $address = 'Voucher';
             $name = 'PTEPromoCode.com';
             $subject = 'Thank you';
             $to = 'pteacademicvouchercode.com';
