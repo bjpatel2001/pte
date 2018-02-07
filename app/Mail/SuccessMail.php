@@ -47,7 +47,7 @@ class SuccessMail extends Mailable
             $subject = 'Customer Enquiry';
         }elseif ($this->successData['type'] == 'mock_test') {
             $to = $this->successData['email'];
-            $view = 'emails.mock_test.blade';
+            $view = 'emails.mock_test';
             $subject = 'PTE Mock Test';
         }
 
