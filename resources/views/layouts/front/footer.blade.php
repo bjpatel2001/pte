@@ -54,10 +54,8 @@
                                                                          style=color:#fff>ptepromocode.com All Rights
                 Reserved</a></div>
 </div>
-<?php
-if (($_SERVER["REQUEST_URI"] == "/index.php") || ($_SERVER["REQUEST_URI"] == "/")){
-?>
-<div class="bt">
+
+{{--<div class="bt">
     <h5 class="fh">PTE Promo Code – Save the highest amount on Buying PTE Exam Voucher</h5>
     PTEpromocode.com offers you an easy way to get discount on the PTE Academic exam price, while booking PTE test
     online. As we are the authentic partners of PTE-Academic, buying the exam from us is 100% safe and cost-convenient.
@@ -86,8 +84,5 @@ if (($_SERVER["REQUEST_URI"] == "/index.php") || ($_SERVER["REQUEST_URI"] == "/"
     material with five free mock tests series and that too at optimum prices. PTE promo codes - PTE vouchers can be
     easily purchased from our website.
 
-</div>
+</div>--}}
 
-<?php
-}
-?>
