@@ -265,6 +265,11 @@ class PteController extends Controller
                                 $admin_email_data['voucher_to_send'] = implode(",", $voucher_to_send);
                                 Mail::send(new SuccessMail($admin_email_data));
 
+                                sleep(3);
+                                $mock_test_mail = [];
+                                $mock_test_mail['type'] = 'mock_test';
+                                $mock_test_mail['email'] = $email;
+                                Mail::send(new SuccessMail($mock_test_mail));
 
                                 $final_voucher_sms = implode(",", $voucher_to_send);
 
@@ -309,7 +314,7 @@ class PteController extends Controller
      */
     public function sendSms($voucher_code,$mobile)
     {
-        $sms = "Your PTE Exam Voucher Code :$voucher_code\nPlease share ptevouchercode.com to your friends & help them to save money on PTE Exam Booking\nRegards\nHitesh Patel";
+        $sms = "Your PTE Exam Promo Code :$voucher_code\nPlease share ptepromocode.com to your friends & help them to save money on PTE Exam Booking.";
         //Your authentication key
         $authKey = "134556AZbJqzDsxSk585abcb1";
 
@@ -317,7 +322,7 @@ class PteController extends Controller
         $mobileNumber = $mobile;
 
         //Sender ID,While using route4 sender id should be 6 characters long.
-        $senderId = "Vouchr";
+        $senderId = "PTEPRC";
 
         //Your message to send, Add URL encoding here.
         $message = urlencode($sms);

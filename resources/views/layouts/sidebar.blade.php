@@ -78,6 +78,15 @@
                             </ul>
                         </li>
 
+                        <li class="parent {{$saledataManagementTab or ''}}" title="{{trans('app.sale_data_managment')}}"><a href="#"><i
+                                        class="icon mdi mdi-quote mdi-18px"></i><span>{{trans('app.sale_data_managment')}}</span></a>
+                            <ul class="sub-menu">
+                                <li class="{{$saledataTab or ''}}">
+                                    <a href="{{url('saledata/list')}}">{{trans('app.sale_data')}}</a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li title="Reports"><a href="{{url('/maintanance')}}"><i class="icon fa fa-file-text-o"
                                                                                  aria-hidden="true"></i><span>{{trans('app.reports')}}</span></a>
                         </li>

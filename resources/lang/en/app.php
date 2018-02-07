@@ -76,26 +76,29 @@ return [
     'default_error' => 'Problem with the :action :module!',
 
     // Promo
-    'voucher_managment' => 'Voucher Managment',
+    'voucher_managment' => 'Voucher Management',
     'voucher' => 'Voucher',
 
     //Enquiry
-    'enquiry_managment' => 'Enquiry Managment',
+    'enquiry_managment' => 'Enquiry Management',
     'enquiry' => 'Enquiry',
 
-    //Prize Managment
-    'prize_managment' => 'Prize Managment',
+    //Prize Management
+    'prize_managment' => 'Prize Management',
     'prize' => 'Prize',
 
-    //Front Detail Managment
-    'detail_managment' => 'Front Detail Managment',
+    //Front Detail Management
+    'detail_managment' => 'Front Detail Management',
     'detail' => 'Detail',
 
-    //Front Detail Managment
+    //Front Detail Management
     'offline_payment_managment' => 'Offline Payment',
     'offline' => 'Offline',
     'add_new_agent_payment' => 'Add new agent payment',
-    'add_existing_agent_payment' => 'Add existing agent payment'
-
+    'add_existing_agent_payment' => 'Add existing agent payment',
+    
+    //Front Detail Management
+    'sale_data_managment' => 'Sale Data Management',
+    'sale_data' => 'Sale Data',
 
 ];

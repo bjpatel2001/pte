@@ -49,5 +49,17 @@ return [
         "mobile",
         ""
     ],
+    "saledataDataTableFieldArray" => [
+
+        "created_date",
+        "name",
+        "email",
+        "mobile",
+        "voucher_code",
+        "payment_code",
+        "rate",
+        "amount_paid",
+        "number_of_voucher",
+    ],
 ];
 

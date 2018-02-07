@@ -17,6 +17,8 @@ Route::get('/how-to-book', 'Auth\LoginController@howToBook');
 Route::get('/pte-faq', 'Auth\LoginController@pteFaq');
 Route::get('/refund-policy', 'Auth\LoginController@refundPolicy');
 Route::get('/contact-us', 'Auth\LoginController@contactUs');
+Route::post('/send-query', 'Auth\LoginController@sendQuery');
+
 
 Route::get('/backend', function () {
     return Redirect::to('login');
@@ -133,4 +135,10 @@ Route::group(['prefix' => 'offline'], function () {
     Route::post('/store-existing-agent-payment', 'OfflinePaymentController@storeExistingAgentPayment');
     Route::post('/datatable', 'OfflinePaymentController@datatable');
     Route::post('/delete', 'OfflinePaymentController@delete');
+});
+
+Route::group(['prefix' => 'saledata'], function () {
+    Route::any('/list', 'SaleDataController@index');
+    Route::post('/datatable', 'SaleDataController@datatable');
+    Route::post('/delete', 'SaleDataController@delete');
 });

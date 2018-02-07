@@ -178,7 +178,10 @@ class Enquiry extends Authenticatable
         $enquiry->updated_at = date('Y-m-d H:i:s');
         $enquiryId = $enquiry->save();
         if ($enquiryId) {
-            Mail::send(new EnquiryMail($enquiry));
+            Mail::send(new EnquiryMail($enquiry,'customer'));
+            sleep(5);
+            Mail::send(new EnquiryMail($enquiry,'admin'));
+
             return $enquiry;
         } else {
             return false;

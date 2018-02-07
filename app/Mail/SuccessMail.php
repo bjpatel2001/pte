@@ -31,23 +31,29 @@ class SuccessMail extends Mailable
     public function build()
     {
 
-        $address = 'help@ptevouchercode.com';
-        $name = 'PTEVoucherCode.com';
-        $bcc = 'hitesh.53310@gmail.com';
+        $address = 'pteacademicvouchercode.com';
+        $name = 'PTEPromoCode.com';
         if($this->successData['type'] == 'admin') {
-            $to = 'hitesh.53310@gmail.com';
+            $to = 'pteacademicvouchercode';
             $view = 'emails.success_admin';
             $subject = 'Success';
-        }else {
+        }elseif ($this->successData['type'] == 'customer'){
             $to = $this->successData['email'];
             $view = 'emails.success_customer';
-            $subject = 'PTE Voucher Code';
+            $subject = 'PTE Promo Code';
+        }elseif($this->successData['type'] == 'send_query'){
+            $to = 'pteacademicvouchercode';
+            $view = 'emails.customer_contactus';
+            $subject = 'Customer Enquiry';
+        }elseif ($this->successData['type'] == 'mock_test') {
+            $to = $this->successData['email'];
+            $view = 'emails.mock_test.blade';
+            $subject = 'PTE Mock Test';
         }
 
         return $this->view($view)
             ->to($to)
             ->from($address, $name)
-            ->bcc($bcc, $name)
             ->replyTo($address, $name)
             ->subject($subject);
     }

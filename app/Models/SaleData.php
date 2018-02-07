@@ -25,7 +25,10 @@ class SaleData extends Authenticatable
         'enquiry_id', 'voucher_id', 'payment_code', 'rate','amount_paid','number_of_voucher'
     ];
 
-    
+    public function Enquiry()
+    {
+        return $this->hasOne('App\Models\Enquiry', 'id', 'enquiry_id');
+    }
 
     /**
      * Get all User getCollection
@@ -35,7 +38,7 @@ class SaleData extends Authenticatable
     public function getCollection()
     {
 
-         $saledata = SaleData::select('tbl_sale_data.*');
+         $saledata = SaleData::with('Enquiry');
 
         return $saledata->get();
     }
@@ -47,7 +50,7 @@ class SaleData extends Authenticatable
      */
     public function getDatatableCollection()
     {
-       return SaleData::select('tbl_sale_data.*');
+       return SaleData::with('Enquiry');
     }
 
     /**

@@ -18,10 +18,12 @@ class EnquiryMail extends Mailable
      */
     public $enquiryData;
     public $user_name;
-    public function __construct($enquiryData)
+    public $type;
+    public function __construct($enquiryData,$type)
     {
         //
         $this->enquiryData = $enquiryData;
+        $this->type = $type;
     }
 
     /**
@@ -31,18 +33,25 @@ class EnquiryMail extends Mailable
      */
     public function build()
     {
-        $this->user_name = $this->enquiryData->name;
-        $address = 'help@ptevouchercode.com';
-        $name = 'PTEVoucherCode.com';
-        $subject = 'Thank you';
-        $bcc = 'hitesh.53310@gmail.com';
+        if($this->type == 'customer') {
+            $to = $this->enquiryData->email;
+            $address = 'pteacademicvouchercode.com';
+            $name = 'PTEPromoCode.com';
+            $subject = 'Thank you';
+            $view = 'emails.enquiry';
+        }elseif ($this->type == 'admin') {
+            $address = 'pteacademicvouchercode.com';
+            $name = 'PTEPromoCode.com';
+            $subject = 'Thank you';
+            $to = 'pteacademicvouchercode.com';
+            $view = 'emails.admin_enquiry';
+        }
 
-        return $this->view('emails.enquiry')
-            ->to($this->enquiryData->email)
+        return $this->view($view)
+            ->to($to)
             ->from($address, $name)
-            ->bcc($bcc, $name)
             ->replyTo($address, $name)
-            ->subject($subject)
-            ->with($this->user_name,$this->enquiryData->name);
+            ->subject($subject);
+
     }
 }

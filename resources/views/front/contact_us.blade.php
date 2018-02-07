@@ -2,27 +2,30 @@
 
 @section('content')
 
-    <div class=hd style= 'background-image:{{url('css/front/images/cbg.jpg')}};background-size:cover'>
+    <div class=hd style='background-image:{{url('css/front/images/cbg.jpg')}};background-size:cover'>
         <div class=glass2 style=background:rgba(0,0,0,.6)><h1>Contact Us</h1></div>
     </div>
     <div class=container style="padding:80px 0">
         <div class=row>
             <div class=col-md-1></div>
             <div class=col-md-6 style=padding:40px>
-                <form action=sendmail.php method=POST><h2>Send Message</h2><br><input class=form-control name=Name
-                                                                                      placeholder="Enter Your Name"
-                                                                                      required><br>
+
+                <form action="{{url('send-query')}}" name="app_add_form" id="app_form"  method="post" >
+                    <h2>Send Message</h2><br>
+                    <input class=form-control name="name" placeholder="Enter Your Name" required><br>
                     <div class=row>
-                        <div class=col-md-6><input class=form-control name=Email placeholder="Enter Your E-mail"
+                        <div class=col-md-6><input class=form-control name=email placeholder="Enter Your E-mail"
                                                    required type=email></div>
                         <div class="visible-xs"><br></div>
-                        <div class=col-md-6><input class=form-control name=Mobile placeholder="Enter Your Contact No"
+                        <div class=col-md-6><input class=form-control name=mobile placeholder="Enter Your Contact No"
                                                    required></div>
                     </div>
-                    <br><textarea class=form-control name=Message placeholder="Enter Message" rows=5></textarea><br>
+                    <input type="hidden" name="type" value="send_query">
+                    <br><textarea class=form-control name=message placeholder="Enter Message" rows=5></textarea><br>
                     <button class="btn btn-success" style='float:right;' type=submit><i
                                 class="glyphicon glyphicon-send"></i> Send Message
                     </button>
+                    {{ csrf_field() }}
                 </form>
                 <div style=clear:both;min-height:20px></div>
             </div>
