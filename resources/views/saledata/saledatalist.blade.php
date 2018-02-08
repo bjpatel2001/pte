@@ -72,7 +72,7 @@
 
                                             </th>
                                             <th>
-                                                <input type="text" name="filter[tbl_enquiry.name]" style="width: 80px;" value="" />
+                                                <input type="text" name="filter[tbl_enquiry.name]" style="width: 60px;" value="" />
                                             </th>
                                             <th>
                                                 <input type="text" name="filter[tbl_enquiry.email]" style="width: 80px;"  value="" />
@@ -87,13 +87,13 @@
                                                 <input type="text" name="filter[tbl_sale_data.payment_code]" style="width: 80px;"  value="" />
                                             </th>
                                             <th>
-                                                <input type="text" name="filter[tbl_sale_data.rate]" style="width: 80px;"  value="" />
+                                                <input type="text" name="filter[tbl_sale_data.rate]" style="width: 50px;"  value="" />
                                             </th>
                                             <th>
-                                                <input type="text" name="filter[tbl_sale_data.amount_paid]" style="width: 80px;"  value="" />
+                                                <input type="text" name="filter[tbl_sale_data.amount_paid]" style="width: 50px;"  value="" />
                                             </th>
                                             <th>
-                                                <input type="text" name="filter[tbl_sale_data.number_of_voucher]" style="width: 80px;"  value="" />
+                                                <input type="text" name="filter[tbl_sale_data.number_of_voucher]" style="width: 30px;"  value="" />
                                             </th>
 
                                         </tr>
