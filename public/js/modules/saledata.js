@@ -85,6 +85,11 @@ app.saledata = {
         app.saledata.events.init();
         app.dataTable.custom({"url":'saledata/datatable'});
         app.dataTable.eventFire();
+    },
+    init_invoice: function () {
+        app.saledata.events.init();
+        app.dataTable.custom({"url":'saledata/invoie-datatable'});
+        app.dataTable.eventFire();
     }
 }
 

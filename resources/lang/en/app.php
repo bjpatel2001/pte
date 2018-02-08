@@ -100,5 +100,7 @@ return [
     //Front Detail Management
     'sale_data_managment' => 'Sale Data Management',
     'sale_data' => 'Sale Data',
+    'invoice_data' => 'Invoice Data',
+    'invoice_data_managment' => 'Invoice Data Management',
 
 ];

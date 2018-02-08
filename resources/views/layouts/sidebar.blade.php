@@ -85,6 +85,11 @@
                                     <a href="{{url('saledata/list')}}">{{trans('app.sale_data')}}</a>
                                 </li>
                             </ul>
+                            <ul class="sub-menu">
+                                <li class="{{$invoicedataTab or ''}}">
+                                    <a href="{{url('saledata/invoice-list')}}">{{trans('app.invoice_data')}}</a>
+                                </li>
+                            </ul>
                         </li>
 
                         <li title="Reports"><a href="{{url('/maintanance')}}"><i class="icon fa fa-file-text-o"

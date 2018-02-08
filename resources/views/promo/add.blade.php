@@ -34,11 +34,13 @@
                                 </div>
                             @endif
                             <form action="{{url('/voucher/store')}}" name="app_add_form" id="app_form" style="border-radius: 0px;" method="post" class="form-horizontal group-border-dashed">
-
+                                <span class="help-block" style="font-weight:bold;color:#c09853"> To add more then one Voucher please type voucher code in next line by pressing enter</span>
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Voucher Code <span class="error">*</span></label>
                                     <div class="col-sm-6 col-md-4">
-                                        <input type="text" name="voucher_code" id="voucher_code" placeholder="Vocher Code" class="form-control input-sm required" value="{{old('voucher_code')}}" />
+
+
+                                        <textarea rows="8" cols="50" name="voucher_code"  class="form-control input-sm required"> </textarea>
                                     </div>
                                 </div>
 

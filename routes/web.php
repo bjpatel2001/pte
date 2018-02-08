@@ -139,6 +139,8 @@ Route::group(['prefix' => 'offline'], function () {
 
 Route::group(['prefix' => 'saledata'], function () {
     Route::any('/list', 'SaleDataController@index');
+    Route::any('/invoice-list', 'SaleDataController@invoiceList');
     Route::post('/datatable', 'SaleDataController@datatable');
+    Route::post('/invoie-datatable', 'SaleDataController@invoiceDatatable');
     Route::post('/delete', 'SaleDataController@delete');
 });

@@ -208,7 +208,15 @@ class PromoController extends Controller
         // Start Communicate with database
         DB::beginTransaction();
         try{
-            $addpromo = $this->promo->addPromo($request->all());
+            $request_voucher_data = $request->all();
+
+            $voucher = explode("\r\n",$request_voucher_data['voucher_code']);
+
+           foreach ($voucher as $vocher_id) {
+               $request_data['voucher_code'] = $vocher_id;
+               $addpromo = $this->promo->addPromo($request_data);
+           }
+
             DB::commit();
         } catch (\Exception $e) {
             //exception handling

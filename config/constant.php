@@ -62,5 +62,19 @@ return [
         "number_of_voucher",
 
     ],
+    "invoicedataDataTableFieldArray" => [
+
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+
+
+    ],
 ];
 
