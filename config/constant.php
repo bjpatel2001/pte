@@ -60,6 +60,7 @@ return [
         "rate",
         "amount_paid",
         "number_of_voucher",
+        ""
     ],
 ];
 
