@@ -53,15 +53,15 @@
                                         <thead>
 
                                         <tr>
-                                            <th class="no-sort">Created Date</th>
+                                            <th class="no-sort">Date</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Mobile</th>
-                                            <th>Voucher Code</th>
-                                            <th>Transaction Id</th>
+                                            <th>Voucher</th>
+                                            <th>Trans Id</th>
                                             <th>Rate</th>
                                             <th>Total Amount</th>
-                                            <th>Number of Qty</th>
+                                            <th>No of Qty</th>
 
                                         </tr>
 
@@ -118,11 +118,7 @@
 <script src="{{url('js/plugins/jquery.datetimepicker.js')}}" type="text/javascript"></script>
 <script src="{{url('js/appDatatable.js')}}"></script>
 <script src="{{url('js/modules/saledata.js')}}"></script>
-<script>
-    $( function() {
-        $( "#created_date" ).datepicker();
-    } );
-</script>
+
 @endpush
 @push('internalJsLoad')
 <script>
