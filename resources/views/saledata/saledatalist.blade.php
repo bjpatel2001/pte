@@ -72,7 +72,7 @@
                                                 {{--<input type="text" name="filter[created_date]" style="width: 80px;" id="created_date" value="" />--}}
                                             </th>
                                             <th>
-                                                <input type="text" name="filter[name]" style="width: 80px;" id="name" value="" />
+                                                <input type="text" name="filter[tbl_enquiry.name]" style="width: 80px;" value="" />
                                             </th>
                                             <th>
                                                 <input type="text" name="filter[email]" style="width: 80px;" id="email" value="" />

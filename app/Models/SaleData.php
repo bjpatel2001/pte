@@ -50,7 +50,8 @@ class SaleData extends Authenticatable
      */
     public function getDatatableCollection()
     {
-       return SaleData::with('Enquiry');
+       return SaleData::join('tbl_enquiry', 'tbl_enquiry.id', '=', 'tbl_sale_data.enquiry_id')
+            ->select('tbl_enquiry.*', 'tbl_sale_data.*');
     }
 
     /**
