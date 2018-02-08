@@ -95,8 +95,7 @@
                                             <th>
                                                 <input type="text" name="filter[number_of_voucher]" style="width: 80px;" id="number_of_voucher" value="" />
                                             </th>
-                                      
-                                            <th></th>
+
                                         </tr>
                                         </thead>
 
