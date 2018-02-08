@@ -62,7 +62,6 @@
                                             <th>Rate</th>
                                             <th>Total Amount</th>
                                             <th>Number of Qty</th>
-                                            <th></th>
 
                                         </tr>
 
@@ -97,7 +96,6 @@
                                                 <input type="text" name="filter[number_of_voucher]" style="width: 80px;" id="number_of_voucher" value="" />
                                             </th>
 
-                                            <th></th>
                                         </tr>
                                         </thead>
 
