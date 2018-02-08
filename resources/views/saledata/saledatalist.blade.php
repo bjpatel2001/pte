@@ -53,7 +53,7 @@
                                         <thead>
 
                                         <tr>
-                                            <th>Created Date</th>
+                                            <th class="no-sort">Created Date</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Mobile</th>
@@ -69,31 +69,31 @@
                                         <thead>
                                         <tr>
                                             <th>
-                                                {{--<input type="text" name="filter[created_date]" style="width: 80px;" id="created_date" value="" />--}}
+
                                             </th>
                                             <th>
                                                 <input type="text" name="filter[tbl_enquiry.name]" style="width: 80px;" value="" />
                                             </th>
                                             <th>
-                                                <input type="text" name="filter[email]" style="width: 80px;" id="email" value="" />
+                                                <input type="text" name="filter[tbl_enquiry.email]" style="width: 80px;"  value="" />
                                             </th>
                                             <th>
-                                                <input type="text" name="filter[mobile]" style="width: 80px;" id="mobile" value="" />
+                                                <input type="text" name="filter[tbl_enquiry.mobile]" style="width: 80px;"  value="" />
                                             </th>
                                             <th>
-                                                <input type="text" name="filter[voucher_code]" style="width: 80px;" id="voucher_code" value="" />
+                                                <input type="text" name="filter[tbl_sale_data.voucher_code]" style="width: 80px;"  value="" />
                                             </th>
                                             <th>
-                                                <input type="text" name="filter[payment_code]" style="width: 80px;" id="payment_code" value="" />
+                                                <input type="text" name="filter[tbl_sale_data.payment_code]" style="width: 80px;"  value="" />
                                             </th>
                                             <th>
-                                                <input type="text" name="filter[rate]" style="width: 80px;" id="rate" value="" />
+                                                <input type="text" name="filter[tbl_sale_data.rate]" style="width: 80px;"  value="" />
                                             </th>
                                             <th>
-                                                <input type="text" name="filter[amount_paid]" style="width: 80px;" id="amount_paid" value="" />
+                                                <input type="text" name="filter[tbl_sale_data.amount_paid]" style="width: 80px;"  value="" />
                                             </th>
                                             <th>
-                                                <input type="text" name="filter[number_of_voucher]" style="width: 80px;" id="number_of_voucher" value="" />
+                                                <input type="text" name="filter[tbl_sale_data.number_of_voucher]" style="width: 80px;"  value="" />
                                             </th>
 
                                         </tr>
