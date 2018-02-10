@@ -110,4 +110,16 @@ class Detail extends Authenticatable
             return false;
         }
     }
+
+    /**
+     * Get all User getCollection
+     *
+     * @return mixed
+     */
+    public function getData()
+    {
+
+        $data = Detail::select('tbl_detail.*');
+        return $data->first();
+    }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Detail;
+use App\Models\Prize;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
@@ -79,6 +81,19 @@ class LoginController extends Controller
     {
         $state_model = new State();
         $data['state'] = $state_model->getCollection();
+        $detail_model = new Detail();
+        //For saved prize and detail
+        $data_saved_prize = $detail_model->getData();
+        if(!empty($data_saved_prize)) {
+            $data['title'] = $data_saved_prize->page_title;
+            $data['saved_prize'] = $data_saved_prize->saved_prize;
+        }
+       //For prize
+        $prize_model = new Prize();
+        $prize_data = $prize_model->getFirstPrize();
+        if(!empty($prize_data)) {
+            $data['rate'] =   floor($prize_data->rate);
+        }
         return view('front.index',$data);
     }
 

@@ -32,12 +32,20 @@
         f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-5L5SL7V');</script>
 <!-- End Google Tag Manager -->
+<head>
+    <script src="{{ asset('slider/sliderengine/jquery.js') }}"></script>
+    <script src="{{ asset('slider/sliderengine/amazingslider.js') }}"></script>
+    <link rel="stylesheet" href="{{url('slider/sliderengine/amazingslider-1.css')}}" type="text/css" />
+    <script src="{{ asset('slider/sliderengine/initslider-1.js') }}"></script>
 
+</head>
 <meta content="Want to book PTE Academic Exam online? Buy PTE Voucher online at ₹ and get free mock test. Get your voucher/promo code and free mock test instantly."
       name=description>
 <meta content="width=device-width,initial-scale=1" name=viewport>
 <meta content="text/html; charset=utf-8" http-equiv=Content-Type>
 <link rel="shortcut icon" type="image/x-icon" href="{!! asset('css/front/images/favicon.png') !!}">
+
+
 <link rel="stylesheet" href="{{url('css/front/css/bootstrap.css')}}" type="text/css" />
 <link rel="stylesheet" href="{{url('css/front/css/style.css')}}" type="text/css" />
 <link rel="stylesheet" href="{{url('css/front/css/anim.css')}}" type="text/css" />
@@ -46,10 +54,27 @@
 <link href="//fonts.googleapis.com/css?family=Arima+Madurai" rel=stylesheet>
 <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic"
       rel=stylesheet>
-<script src="{{url('js/plugins/jquery.min.js')}}" type="text/javascript"></script>
+{{--<script src="{{url('js/plugins/jquery.min.js')}}" type="text/javascript"></script>--}}
 <script src="{{url('js/plugins/bootstrap.min.js')}}" type="text/javascript"></script>
 <script src="{{url('css/front/js/move-top.js')}}"></script>
 <script src="{{url('css/front/js/easing.js')}}"></script>
+
+<script src="{{ asset('css/front/js/responsiveslides.min.js') }}"></script>
+<script async>$(function () {
+        $("#slider3").responsiveSlides({
+            auto: !0,
+            pager: !0,
+            nav: !1,
+            speed: 500,
+            namespace: "callbacks",
+            before: function () {
+                $(".events").append("<li>before event fired.</li>")
+            },
+            after: function () {
+                $(".events").append("<li>after event fired.</li>")
+            }
+        })
+    })</script>
 
 <script async>jQuery(document).ready(function (t) {
         t(".scroll").click(function (e) {
@@ -60,12 +85,14 @@
         $().UItoTop({easingType: "easeOutQuart"})
     })</script>
 <link rel="stylesheet" href="{{url('css/front/ui/jquery-ui.css')}}" type="text/css" />
-<link rel="stylesheet" href="{{url('css/front/ui/jquery-ui.js')}}" type="text/css" />
+<script src="{{ asset('css/front/ui/jquery-ui.js') }}"></script>
+
 <script>
     window.Laravel = <?php echo json_encode([
         'csrfToken' => csrf_token(),
     ]); ?>
 </script>
+
 <body>
 
 @include('layouts.front.header')
@@ -81,8 +108,8 @@
 
 <!-- Scripts -->
 <script src="{{ asset('css/front/js/bars.js') }}"></script>
-<script src="{{ asset('css/front/js/jquery.wmuSlider.js') }}"></script>
-<script src="{{ asset('css/front/js/responsiveslides.min.js') }}"></script>
+
+
 <script src="{{ asset('css/front/js/smoothbox.jquery2.js') }}"></script>
 
 @stack('external_script')
