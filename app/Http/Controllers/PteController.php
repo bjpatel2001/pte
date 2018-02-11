@@ -286,8 +286,8 @@ class PteController extends Controller
                                 $sale_data_entry['number_of_voucher'] = $number_of_voucher;
                                 $sale_data = $this->saleData->addSaleData($sale_data_entry);
                                 if($sale_data) {
-                                    $request->session()->flash('alert-success','Payment done successfully please check your email');
-                                    return redirect('/');
+
+                                    return redirect('/thankyou');
                                 }
                             }
                         } else {

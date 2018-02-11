@@ -85,5 +85,14 @@ return [
         "",
         ""
     ],
+    "expensedataDataTableFieldArray" => [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+    ]
 ];
 

@@ -145,4 +145,13 @@ class LoginController extends Controller
         return redirect('/send-query');
     }
 
+    /**
+     * contactUs view page
+     *
+     */
+    public function thankYou()
+    {
+        return view('thankyou');
+    }
+
 }

@@ -8,11 +8,11 @@ use Auth;
 
 
 
-class Promo extends Authenticatable
+class ExpenseData extends Authenticatable
 {
     use Notifiable;
    
-    protected $table = 'tbl_promo_voucher';
+    protected $table = 'tbl_expense_data';
     protected $primaryKey = 'id';
     
 
@@ -22,7 +22,7 @@ class Promo extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'voucher_code', 'status', 'created_by', 'updated_by'
+        'date', 'name','detail','before_gst','gst','after_gst'
     ];
 
     
@@ -35,9 +35,8 @@ class Promo extends Authenticatable
     public function getCollection()
     {
 
-         $promo = Promo::select('tbl_promo_voucher.*');
-            $promo->where('status',0);
-        return $promo->get();
+         $expensedata = ExpenseData::select('tbl_expense_data.*');
+        return $expensedata->get();
     }
 
     /**
@@ -47,19 +46,19 @@ class Promo extends Authenticatable
      */
     public function getDatatableCollection()
     {
-       return Promo::select('tbl_promo_voucher.*')->where('status',0);
+       return ExpenseData::select('tbl_expense_data.*');
     }
 
     /**
-     * Query to get promo total count
+     * Query to get expensedata total count
      *
      * @param $dbObject
-     * @return integer $promoCount
+     * @return integer $expensedataCount
      */
-    public static function getPromoCount($dbObject)
+    public static function getExpenseDataCount($dbObject)
     {
-        $promoCount = $dbObject->count();
-        return $promoCount;
+        $expensedataCount = $dbObject->count();
+        return $expensedataCount;
     }
 
     /**
@@ -67,16 +66,16 @@ class Promo extends Authenticatable
      *
      * @param  \Illuminate\Database\Eloquent\Builder $query
      * @param  Request $request
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return $query
      */
-    public function scopeGetPromoData($query, $request)
+    public function scopeGetExpenseDataData($query, $request)
     {
         return $query->skip($request->start)->take($request->length)->get();
     }
 
     /**
-     * scopeGetFilteredData from App/Models/Promo
-     * get filterred promos
+     * scopeGetFilteredData from App/Models/ExpenseData
+     * get filterred expensedatas
      *
      * @param  object $query
      * @param  \Illuminate\Http\Request $request
@@ -131,10 +130,10 @@ class Promo extends Authenticatable
      * @param  Request $request
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeSortPromoData($query, $request)
+    public function scopeSortExpenseDataData($query, $request)
     {
 
-        return $query->orderBy(config('constant.promoDataTableFieldArray')[$request->order['0']['column']], $request->order['0']['dir']);
+        return $query->orderBy(config('constant.expensedataDataTableFieldArray')[$request->order['0']['column']], $request->order['0']['dir']);
 
     }
 
@@ -152,109 +151,66 @@ class Promo extends Authenticatable
     }
 
     /**
-     * Add & update Promo addPromo
+     * Add & update ExpenseData addExpenseData
      *
      * @param array $models
      * @return boolean true | false
      */
-    public function addPromo(array $models = [])
+    public function addExpenseData(array $models = [])
     {
         if (isset($models['id'])) {
-            $promo = Promo::find($models['id']);
+            $expensedata = ExpenseData::find($models['id']);
         } else {
-            $promo = new Promo;
-            $promo->created_at = date('Y-m-d H:i:s');
-            $promo->created_by = Auth::user()->id;
+            $expensedata = new ExpenseData;
+            $expensedata->created_at = date('Y-m-d H:i:s');
         }
 
-       
-        $promo->voucher_code = $models['voucher_code'];
-        
-        if (isset($models['status'])) {
-            $promo->status = $models['status'];
-        } else {
-            $promo->status = 0;
-        }
 
-        $promo->updated_by = Auth::user()->id;
-        $promo->updated_at = date('Y-m-d H:i:s');
-        $promoId = $promo->save();
+        $expensedata->date = date("Y-m-d H:i:s", strtotime($models['date']));
+        $expensedata->name = $models['name'];
+        $expensedata->detail = $models['detail'];
+        $expensedata->before_gst = $models['before_gst'];
+        $expensedata->gst = $models['gst'];
+        $expensedata->after_gst = $models['after_gst'];
 
-        if ($promoId) {
-            return $promo;
+
+
+        $expensedata->updated_at = date('Y-m-d H:i:s');
+        $expensedataId = $expensedata->save();
+
+        if ($expensedataId) {
+            return $expensedata;
         } else {
             return false;
         }
     }
 
     /**
-     * get Promo By fieldname getPromoByField
+     * get ExpenseData By fieldname getExpenseDataByField
      *
      * @param mixed $id
      * @param string $field_name
      * @return mixed
      */
-    public function getPromoByField($id, $field_name)
+    public function getExpenseDataByField($id, $field_name)
     {
-        return Promo::where($field_name, $id)->first();
+        return ExpenseData::where($field_name, $id)->first();
     }
 
     /**
-     * update Promo Status
-     *
-     * @param array $models
-     * @return boolean true | false
-     */
-    public function updateStatus(array $models = [])
-    {
-        $promo = Promo::find($models['id']);
-        $promo->status = $models['status'];
-        $promo->updated_at = date('Y-m-d H:i:s');
-        $promoId = $promo->save();
-        if ($promoId)
-            return $promo;
-        else
-            return false;
-
-    }
-
-    /**
-     * Delete Promo
+     * Delete ExpenseData
      *
      * @param int $id
      * @return boolean true | false
      */
-    public function deletePromo($id)
+    public function deleteExpenseData($id)
     {
-        $delete = Promo::where('id', $id)->delete();
+        $delete = ExpenseData::where('id', $id)->delete();
         if ($delete)
             return true;
         else
             return false;
 
     }
-
-    /**
-     * Get the count of unused voucher
-     *
-     * @return $return
-     */
-    public function getUnusedVoucher()
-    {
-        $return = Promo::where('status', 0)->count();
-        return $return;
-    }
-
-    /**
-     * Get the count of unused voucher
-     * @param $count
-     * @return $return
-     */
-    public function getVoucherByCount($count)
-    {
-        $return = Promo::where('status', 0)->take($count)->get();
-        return $return;
-    }
-
 
 }

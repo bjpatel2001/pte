@@ -17,6 +17,7 @@ Route::get('/how-to-book', 'Auth\LoginController@howToBook');
 Route::get('/pte-faq', 'Auth\LoginController@pteFaq');
 Route::get('/refund-policy', 'Auth\LoginController@refundPolicy');
 Route::get('/contact-us', 'Auth\LoginController@contactUs');
+Route::get('/thankyou', 'Auth\LoginController@thankYou');
 Route::post('/send-query', 'Auth\LoginController@sendQuery');
 
 
@@ -116,6 +117,17 @@ Route::group(['prefix' => 'purchase'], function () {
     Route::post('/store', 'PurchaseDataController@store');
     Route::post('/update', 'PurchaseDataController@update');
     Route::post('/datatable', 'PurchaseDataController@datatable');
+});
+
+Route::group(['prefix' => 'expense'], function () {
+
+    Route::any('/list', 'ExpenseDataController@index');
+    Route::get('/add', 'ExpenseDataController@create');
+    Route::get('/edit/{id}', 'ExpenseDataController@edit');
+    Route::post('/delete', 'ExpenseDataController@delete');
+    Route::post('/store', 'ExpenseDataController@store');
+    Route::post('/update', 'ExpenseDataController@update');
+    Route::post('/datatable', 'ExpenseDataController@datatable');
 });
 
 Route::group(['prefix' => 'enquiry'], function () {
