@@ -1,5 +1,5 @@
 /**
- * Created by Mobio Solutions on 18-01-2017.
+ * Created by Brijehs on 18-01-2017.
  */
 
 app.promo = {

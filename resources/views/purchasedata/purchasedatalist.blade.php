@@ -11,10 +11,10 @@
 @section('content')
     <div class="be-content">
         <div class="page-head">
-            <h2>{{trans('app.voucher')}} Management</h2>
+            <h2>Purchase Data Management</h2>
             <ol class="breadcrumb">
                 <li><a href="{{url('/dashboard')}}">{{trans('app.admin_home')}}</a></li>
-                <li class="active">{{trans('app.voucher')}} Listing</li>
+                <li class="active">Purchase Data Listing</li>
             </ol>
         </div>
         <div class="main-content container-fluid">
@@ -29,18 +29,18 @@
                 <div class="row">
                     <div class="col-sm-12 col-xs-12">
                         <div class="activity-but activity-space pull-left">
-                            <div class="pull-left">
+                            {{--<div class="pull-left">
                                 <a href="javascript:void(0);" class="btn btn-warning func_SearchGridData"><i
                                             class="icon mdi mdi-search"></i> Search</a>
                             </div>
                             <div class="pull-left">
                                 <a href="javascript:void(0);" class="btn btn-danger func_ResetGridData"
                                    style="margin-left: 10px;">Reset</a>
-                            </div>
+                            </div>--}}
                             <div class="addreport pull-right">
-                                <a href="{{url('/voucher/add')}}">
+                                <a href="{{url('/purchase/add')}}">
                                     <button class="btn btn-space btn-primary"><i
-                                                class="icon mdi mdi-plus "></i> {{trans('app.add')}} {{trans('app.voucher')}}
+                                                class="icon mdi mdi-plus "></i> {{trans('app.add')}} entry
                                     </button>
                                 </a>
                             </div>
@@ -55,36 +55,30 @@
                                     <table id="dataTable"
                                            class="table display dt-responsive responsive nowrap table-striped table-hover table-fw-widget"
                                            style="width: 100%;">
-                                        {{--<colgroup>
-                                            <col width="9%">
-                                            <col width="9%">
-                                            <col width="9%">
-                                            <col width="9%">
-                                            <col width="10%">
-                                            <col width="10%">
-                                            <col width="10%">
-                                            <col width="10%">
-                                            <col width="10%">
-                                            <col width="10%">
 
-                                        </colgroup>--}}
                                         <thead>
 
                                         <tr>
                                             <th class="no-sort">Sr no</th>
-                                            <th>Voucher Code</th>
+                                            <th class="no-sort">Purchase Date</th>
+                                            <th class="no-sort">Received Date</th>
+                                            <th class="no-sort">Invoice Number</th>
+                                            <th class="no-sort">Quantity Number</th>
+                                            <th class="no-sort">Per Voucher Prize</th>
+                                            <th class="no-sort">Total Amount</th>
                                             <th class="no-sort">Action</th>
                                         </tr>
 
                                         </thead>
                                         <thead>
                                         <tr>
+                                            <th> </th>
+                                            <th> </th>
                                             <th></th>
-                                            <th>
-                                                <input type="text" name="filter[voucher_code]" style="width: 80px;" id="
-                                                       voucher_code" value="" />
-                                            </th>
-                                      
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
                                             <th></th>
                                         </tr>
                                         </thead>
@@ -106,10 +100,10 @@
 @push('externalJsLoad')
 <script src="{{url('js/plugins/jquery.datetimepicker.js')}}" type="text/javascript"></script>
 <script src="{{url('js/appDatatable.js')}}"></script>
-<script src="{{url('js/modules/promo.js')}}"></script>
+<script src="{{url('js/modules/purchasedata.js')}}"></script>
 @endpush
 @push('internalJsLoad')
 <script>
-    app.promo.init();
+    app.purchasedata.init();
 </script>
 @endpush

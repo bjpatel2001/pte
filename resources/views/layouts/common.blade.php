@@ -73,6 +73,7 @@
 </div>
 
 <!-- Mainly scripts -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="{{url('js/plugins/jquery.min.js')}}" type="text/javascript"></script>
 <script src="{{url('js/plugins/jquery-ui.min.js')}}" type="text/javascript"></script>
 <script src="{{url('js/plugins/perfect-scrollbar.jquery.min.js')}}" type="text/javascript"></script>

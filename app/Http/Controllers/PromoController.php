@@ -94,11 +94,14 @@ class PromoController extends Controller
          */
         $promoData = $promoData->GetPromoData($request);
         $appData = array();
+        $i = 1;
         foreach ($promoData as $promoData) {
             $row = array();
+            $row[] = $i;
             $row[] = $promoData->voucher_code;
             $row[] = view('datatable.action', ['module' => "voucher",'type' => $promoData->id, 'id' => $promoData->id])->render();
             $appData[] = $row;
+            $i++;
         }
 
         return [

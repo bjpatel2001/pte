@@ -1,8 +1,8 @@
 /**
- * Created byBrijehs on 18-01-2017.
+ * Created by Brijesh on 18-01-2017.
  */
 
-app.offlinepayment = {
+app.purchasedata = {
 
     events: {
         switch: function () {
@@ -32,8 +32,8 @@ app.offlinepayment = {
         },
 
         init: function () {
-            app.offlinepayment.events.switch();
-            app.offlinepayment.events.delete();
+            app.purchasedata.events.switch();
+            app.purchasedata.events.delete();
             app.dataTable.search();
             app.dataTable.reset();
 
@@ -82,9 +82,20 @@ app.offlinepayment = {
     },
 
     init: function () {
-        app.offlinepayment.events.init();
-        app.dataTable.custom({"url":'offline/datatable'});
+        app.purchasedata.events.init();
+        app.dataTable.custom({"url":'purchase/datatable'});
         app.dataTable.eventFire();
     }
 }
 
+function checkParentValid() {
+    var role = $("#role_id").children("option:selected").text().toLowerCase();
+    if(role == "admin" || role == "coo"){
+        $("#parent_id").val('0');
+        $("#parent_id").closest("div.form-group").hide();
+        return true;
+    }else{
+        $("#parent_id").closest("div.form-group").show();
+        return false;
+    }
+}

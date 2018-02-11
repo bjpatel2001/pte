@@ -31,18 +31,18 @@ class SuccessMail extends Mailable
     public function build()
     {
 
-        $address = 'bjpatel2001@gmail.com';
+        $address = 'info@compassoverseas.com';
         $name = 'PTEPromoCode.com';
         if($this->successData['type'] == 'admin') {
-            $to = 'bjpatel2001@gmail.com';
+            $to = 'info@compassoverseas.com';
             $view = 'emails.success_admin';
-            $subject = 'Success';
+            $subject = $this->successData['name'].'Success';
         }elseif ($this->successData['type'] == 'customer'){
             $to = $this->successData['email'];
             $view = 'emails.success_customer';
             $subject = 'PTE Promo Code';
         }elseif($this->successData['type'] == 'send_query'){
-            $to = 'bjpatel2001@gmail.com';
+            $to = 'info@compassoverseas.com';
             $view = 'emails.customer_contactus';
             $subject = 'Customer Enquiry';
         }elseif ($this->successData['type'] == 'mock_test') {

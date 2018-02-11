@@ -167,7 +167,7 @@ class SaleDataController extends Controller
         if (isset(config('constant.invoicedataDataTableFieldArray')[$request->order['0']['column']])) {
             $saledataData = $saledataData->SortSaleDataData($request);
         } else {
-            $saledataData = $saledataData->SortDefaultDataByRaw('tbl_sale_data.id', 'desc');
+            $saledataData = $saledataData->SortDefaultDataByRaw('tbl_sale_data.created_date', 'desc');
         }
 
         /**
@@ -188,9 +188,9 @@ class SaleDataController extends Controller
             $row[] = (isset($saledataData->Enquiry)) ? $saledataData->Enquiry->mobile : "---";
             $row[] = $saledataData->voucher_code;
             $row[] = $saledataData->payment_code;
-            $row[] = $saledataData->amount_paid * 0.18;
+            $row[] = $amount_paid - ($saledataData->amount_paid * 0.18);
             $row[] = $saledataData->amount_paid;
-            $row[] = (isset($saledataData->Enquiry) && $saledataData->Enquiry->state == 5) ? 'SGST:'.$saledataData->amount_paid * 0.18 : 'SGST:'.$amount_paid * 0.09.'<br>'.'CGST:'.$amount_paid * 0.09 ;
+            $row[] = (isset($saledataData->Enquiry) && $saledataData->Enquiry->state == 5) ? 'SGST:'.$saledataData->amount_paid * 0.18 : 'SGST:'.$amount_paid * 0.09.'<br>'.'CGST:'.$amount_paid * 0.09.'<br>'.'IGST:-';
             $appData[] = $row;
         }
 

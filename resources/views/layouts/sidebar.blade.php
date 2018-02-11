@@ -90,6 +90,18 @@
                             </ul>
                         </li>
 
+                        <li class="parent {{$purchasedataManagementTab or ''}}" title="Purchase Data Managment"><a href="#"><i
+                                        class="icon mdi mdi-quote mdi-18px"></i><span>PurchaseDataManagment</span></a>
+                            <ul class="sub-menu">
+                                <li class="{{$purchasedataTab or ''}}">
+                                    <a href="{{url('purchase/list')}}">Purchase Data</a>
+                                </li>
+                                <li class="{{$expenseDataTab or ''}}">
+                                    <a href="{{url('expense/list')}}">Expense Data</a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li title="Reports"><a href="{{url('/maintanance')}}"><i class="icon fa fa-file-text-o"
                                                                                  aria-hidden="true"></i><span>{{trans('app.reports')}}</span></a>
                         </li>

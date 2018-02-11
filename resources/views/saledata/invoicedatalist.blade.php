@@ -59,8 +59,8 @@
                                             <th>Mobile</th>
                                             <th>Voucher</th>
                                             <th>Trans Id</th>
-                                            <th>GST amount</th>
-                                            <th>Total Amount</th>
+                                            <th>Price Before GST</th>
+                                            <th>Price After GST</th>
                                             <th>SGST/CGST</th>
 
                                         </tr>

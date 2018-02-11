@@ -1,7 +1,7 @@
 <?php
 /**
- * Created by Mobio Solutions.
- * User: Nikhil Jain
+ * Created byBrijehs.
+ * User: Brijesh
  * Date: 19-01-2017
  * Time: 13:59
  */
@@ -75,6 +75,15 @@ return [
         ""
 
 
+    ],
+    "purchasedataDataTableFieldArray" => [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
     ],
 ];
 

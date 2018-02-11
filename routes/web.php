@@ -98,7 +98,6 @@ Route::group(['prefix' => 'voucher'], function () {
     Route::get('/add/{flag?}', 'PromoController@create')->name('createPromo');
     Route::get('/profile', 'PromoController@profile');
     Route::get('/edit/{id}/{flag?}', 'PromoController@edit')->name('editPromo');
-    Route::get('/log/{id}', 'PromoController@log')->name('logPromo');
     Route::post('/delete', 'PromoController@delete')->name('deletePromo');
     Route::post('/store', 'PromoController@store')->name('storePromo');
     Route::post('/update', 'PromoController@update')->name('updatePromo');
@@ -108,6 +107,16 @@ Route::group(['prefix' => 'voucher'], function () {
 
 });
 
+Route::group(['prefix' => 'purchase'], function () {
+
+    Route::any('/list', 'PurchaseDataController@index');
+    Route::get('/add', 'PurchaseDataController@create');
+    Route::get('/edit/{id}', 'PurchaseDataController@edit');
+    Route::post('/delete', 'PurchaseDataController@delete');
+    Route::post('/store', 'PurchaseDataController@store');
+    Route::post('/update', 'PurchaseDataController@update');
+    Route::post('/datatable', 'PurchaseDataController@datatable');
+});
 
 Route::group(['prefix' => 'enquiry'], function () {
 
