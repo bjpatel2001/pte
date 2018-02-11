@@ -167,7 +167,7 @@ class SaleDataController extends Controller
         if (isset(config('constant.invoicedataDataTableFieldArray')[$request->order['0']['column']])) {
             $saledataData = $saledataData->SortSaleDataData($request);
         } else {
-            $saledataData = $saledataData->SortDefaultDataByRaw('tbl_sale_data.created_date', 'desc');
+            $saledataData = $saledataData->SortDefaultDataByRaw('tbl_sale_data.created_at', 'desc');
         }
 
         /**

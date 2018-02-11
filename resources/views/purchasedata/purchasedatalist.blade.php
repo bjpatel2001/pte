@@ -60,8 +60,8 @@
 
                                         <tr>
                                             <th class="no-sort">Sr no</th>
-                                            <th class="no-sort">Purchase Date</th>
-                                            <th class="no-sort">Received Date</th>
+                                            <th class="no-sort">Invoice Date</th>
+                                            <th class="no-sort">Payment made Date</th>
                                             <th class="no-sort">Invoice Number</th>
                                             <th class="no-sort">Quantity Number</th>
                                             <th class="no-sort">Per Voucher Prize</th>

@@ -36,16 +36,16 @@
                             <form action="{{url('/purchase/update')}}" name="app_add_form" id="app_form" style="border-radius: 0px;" method="post" class="form-horizontal group-border-dashed">
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label">Purchase Date<span class="error">*</span></label>
+                                    <label class="col-sm-4 control-label">Invoice Date<span class="error">*</span></label>
                                     <div class="col-sm-6 col-md-4">
-                                        <input type="text" name="purchase_date" id="purchase_date" placeholder="Purchase Date" class="form-control input-sm required" value="{{$details->purchase_date}}" />
+                                        <input type="text" name="purchase_date" id="purchase_date" placeholder="Invoice Date" class="form-control input-sm required" value="{{$details->purchase_date}}" />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label">Received Date<span class="error">*</span></label>
+                                    <label class="col-sm-4 control-label">Payment made Date<span class="error">*</span></label>
                                     <div class="col-sm-6 col-md-4">
-                                        <input type="text" name="received_date" id="received_date" placeholder="Received Date" class="form-control input-sm required" value="{{$details->received_date}}" />
+                                        <input type="text" name="received_date" id="received_date" placeholder="Payment made Date" class="form-control input-sm required" value="{{$details->received_date}}" />
                                     </div>
                                 </div>
 

@@ -22,7 +22,7 @@ class PurchaseData extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'purchase_date', 'received_date','invoice_number','quantity','per_voucher_prize','total_amount','created_by', 'updated_by'
+        'purchase_date', 'received_date','invoice_number','quantity','per_voucher_prize','total_amount'
     ];
 
     
