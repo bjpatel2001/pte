@@ -36,25 +36,51 @@
                             <form action="{{url('/expense/store')}}" name="app_add_form" id="app_form" style="border-radius: 0px;" method="post" class="form-horizontal group-border-dashed">
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label">Expense Date<span class="error">*</span></label>
+                                    <label class="col-sm-4 control-label">Invoice Date<span class="error">*</span></label>
                                     <div class="col-sm-6 col-md-4">
-                                        <input type="text" name="date" id="date" placeholder="Expense Date" class="form-control input-sm required" value="{{old('date')}}" />
+                                        <input type="text" name="invoice_date" id="invoice_date" placeholder="Invoice Date" class="form-control input-sm required" value="{{old('invoice_date')}}" />
                                     </div>
                                 </div>
 
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Payment Date<span class="error">*</span></label>
+                                    <div class="col-sm-6 col-md-4">
+                                        <input type="text" name="date" id="date" placeholder="Payment Date" class="form-control input-sm required" value="{{old('date')}}" />
+                                    </div>
+                                </div>
 
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Invoice Number<span class="error">*</span></label>
+                                    <div class="col-sm-6 col-md-4">
+                                        <input type="text" name="invoice_number" id="invoice_number" placeholder="Invoice Number" class="form-control input-sm required" value="{{old('invoice_number')}}" />
+                                    </div>
+                                </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Name<span class="error">*</span></label>
                                     <div class="col-sm-6 col-md-4">
-                                        <input type="text" name="name" id="name" placeholder="Nmae" class="form-control input-sm required" value="{{old('name')}}" />
+                                        <input type="text" name="name" id="name" placeholder="Name" class="form-control input-sm required" value="{{old('name')}}" />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label">Detail<span class="error">*</span></label>
+                                    <label class="col-sm-4 control-label">Narration<span class="error">*</span></label>
                                     <div class="col-sm-6 col-md-4">
-                                        <input type="text" name="detail" id="detail" placeholder="Detail" class="form-control input-sm required" value="{{old('detail')}}" />
+                                        <input type="text" name="detail" id="detail" placeholder="Narration" class="form-control input-sm required" value="{{old('detail')}}" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">GSTN<span class="error">*</span></label>
+                                    <div class="col-sm-6 col-md-4">
+                                        <input type="text" name="gstn" id="gstn" placeholder="GSTN" class="form-control input-sm required" value="{{old('gstn')}}" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">HSN/SAC<span class="error">*</span></label>
+                                    <div class="col-sm-6 col-md-4">
+                                        <input type="text" name="hsn_sac" id="hsn_sac" placeholder="HSN/SAC" class="form-control input-sm required" value="{{old('hsn_sac')}}" />
                                     </div>
                                 </div>
 
@@ -100,6 +126,7 @@
 <script>
     $( function() {
         $( "#date" ).datepicker({dateFormat: 'dd-mm-yy'});
+        $( "#invoice_date" ).datepicker({dateFormat: 'dd-mm-yy'});
     } );
 </script>
 @endpush

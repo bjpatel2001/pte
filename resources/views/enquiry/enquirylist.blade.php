@@ -37,13 +37,13 @@
                                 <a href="javascript:void(0);" class="btn btn-danger func_ResetGridData"
                                    style="margin-left: 10px;">Reset</a>
                             </div>
-                            {{--<div class="addreport pull-right">
-                                <a href="{{url('/enquiry/add')}}">
+                            <div class="addreport pull-right">
+                                <a href="javascript:void(0);" class="export">
                                     <button class="btn btn-space btn-primary"><i
-                                                class="icon mdi mdi-plus "></i> {{trans('app.add')}} {{trans('app.enquiry')}}
+                                                class="icon mdi mdi-plus "></i> Export
                                     </button>
                                 </a>
-                            </div>--}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                                                        payment_request_id" value="" />
                                             </th>
 
-                                      
+                                            <input type="hidden" name="filterExport[export_excel]"  id="export_excel" value="0" />
                                             <th></th>
                                         </tr>
                                         </thead>
@@ -133,5 +133,13 @@
 @push('internalJsLoad')
 <script>
     app.enquiry.init();
+
+    $(document).ready(function () {
+        $(document).on('click', '.export', function () {
+            $('#export_excel').val('1');
+            dataTable.ajax.reload();
+        });
+
+    });
 </script>
 @endpush

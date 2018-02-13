@@ -22,7 +22,7 @@ class PurchaseData extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'purchase_date', 'received_date','invoice_number','quantity','per_voucher_prize','total_amount'
+        'purchase_date', 'received_date','invoice_number','quantity','per_voucher_prize','total_amount','rtgs','narration'
     ];
 
     
@@ -169,6 +169,8 @@ class PurchaseData extends Authenticatable
         $purchasedata->purchase_date = date("Y-m-d H:i:s", strtotime($models['purchase_date']));
         $purchasedata->received_date = date("Y-m-d H:i:s", strtotime($models['received_date']));
         $purchasedata->invoice_number = $models['invoice_number'];
+        $purchasedata->rtgs = $models['rtgs'];
+        $purchasedata->narration = $models['narration'];
         $purchasedata->quantity = $models['quantity'];
         $purchasedata->per_voucher_prize = $models['per_voucher_prize'];
         $purchasedata->total_amount = $models['total_amount'];

@@ -203,8 +203,6 @@ class OfflinePayment extends Authenticatable
         $offlinePayment->mobile = $models['mobile'];
         $offlinePayment->state = $models['state'];
 
-
-
         $offlinePayment->updated_by = Auth::user()->id;
         $offlinePayment->updated_at = date('Y-m-d H:i:s');
         $offlinePaymentId = $offlinePayment->save();
@@ -240,12 +238,50 @@ class OfflinePayment extends Authenticatable
         $enquiry = new Enquiry();
         $enquiry_data = $enquiry->addEnquiry($models);
 
+        //For Adding it to sales data
+        $saleData = new SaleData();
+        $sale_data = $saleData->addSaleData($models);
+
         if ($enquiry_data) {
             return $enquiry_data;
         } else {
             return false;
         }
 
+    }
+
+    /**
+     * Add & update Promo addPromo
+     *
+     * @param array $models
+     * @return boolean true | false
+     */
+    public function updateAgent(array $models = [])
+    {
+        if (isset($models['id'])) {
+            $agent_data = OfflinePayment::find($models['id']);
+        } else {
+            $agent_data = new OfflinePayment();
+            $agent_data->created_at = date('Y-m-d H:i:s');
+            $agent_data->created_by = Auth::user()->id;
+
+        }
+        $agent_data->name = $models['name'];
+        $agent_data->email = $models['email'];
+        $agent_data->mobile = $models['mobile'];
+        $agent_data->state = $models['state'];
+
+
+
+        $agent_data->updated_at = date('Y-m-d H:i:s');
+        $agent_data->updated_by = Auth::user()->id;
+        $promoId = $agent_data->save();
+
+        if ($promoId) {
+            return $agent_data;
+        } else {
+            return false;
+        }
     }
 
     /**

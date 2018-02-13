@@ -86,7 +86,14 @@ class EnquiryController extends Controller
          * @param  \Illuminate\Http\Request $request
          * @return mixed
          */
-        $enquiryData = $enquiryData->GetEnquiryData($request);
+
+        if($request['filterExport']['export_excel'] == 0) {
+            $enquiryData = $enquiryData->GetEnquiryData($request);
+        }else {
+            $enquiryExcelData = $enquiryData->GetFilteredEnquiryData($request);
+        }
+                //scopeGetFilteredEnquiryData
+
         $appData = array();
         foreach ($enquiryData as $enquirysData) {
             $row = array();

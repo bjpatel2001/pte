@@ -50,6 +50,21 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="col-sm-4 control-label">RTGS No<span class="error">*</span></label>
+                                    <div class="col-sm-6 col-md-4">
+                                        <input type="text" name="rtgs" id="rtgs" placeholder="RTGS No" class="form-control input-sm required" value="{{old('rtgs')}}" />
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Narration<span class="error">*</span></label>
+                                    <div class="col-sm-6 col-md-4">
+                                        <input type="text" name="narration" id="narration" placeholder="Narration" class="form-control input-sm required" value="{{old('narration')}}" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label class="col-sm-4 control-label">Invoice Number<span class="error">*</span></label>
                                     <div class="col-sm-6 col-md-4">
                                         <input type="text" name="invoice_number" id="invoice_number" placeholder="Invoice Number" class="form-control input-sm required" value="{{old('invoice_number')}}" />

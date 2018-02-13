@@ -69,10 +69,10 @@
                                         <thead>
                                         <tr>
                                             <th>
-
+                                                <input type="text" name="filter[tbl_sale_data.created_at]" id="date" style="width: 60px;" value="" />
                                             </th>
                                             <th>
-                                                <input type="text" name="filter[tbl_enquiry.name]" style="width: 60px;" value="" />
+                                                <input type="text" name="filter[tbl_sale_data.created_at]" id="date1" style="width: 60px;" value="" />
                                             </th>
                                             <th>
                                                 <input type="text" name="filter[tbl_enquiry.email]" style="width: 80px;"  value="" />
@@ -118,7 +118,12 @@
 <script src="{{url('js/plugins/jquery.datetimepicker.js')}}" type="text/javascript"></script>
 <script src="{{url('js/appDatatable.js')}}"></script>
 <script src="{{url('js/modules/saledata.js')}}"></script>
-
+<script>
+    $( function() {
+        $( "#date" ).datepicker({dateFormat: 'dd-mm-yy'});
+        $( "#date1" ).datepicker({dateFormat: 'dd-mm-yy'});
+    } );
+</script>
 @endpush
 @push('internalJsLoad')
 <script>

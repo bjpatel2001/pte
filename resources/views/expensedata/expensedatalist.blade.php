@@ -60,20 +60,28 @@
 
                                         <tr>
                                             <th class="no-sort">Sr no</th>
-                                            <th class="no-sort">Expense Date</th>
+                                            <th class="no-sort">Invoice Date</th>
+                                            <th class="no-sort">Payment Date</th>
+                                            <th class="no-sort">Invoice No</th>
                                             <th class="no-sort">Name</th>
-                                            <th class="no-sort">Detail</th>
-                                            <th class="no-sort">Expense Before GST</th>
-                                            <th class="no-sort">GST Amount</th>
-                                            <th class="no-sort">Expense After GST</th>
+                                            <th class="no-sort">Narration</th>
+                                            <th class="no-sort">GSTN</th>
+                                            <th class="no-sort">HSN/SAC</th>
+                                            <th class="no-sort">Before GST</th>
+                                            <th class="no-sort">GST Rs</th>
+                                            <th class="no-sort">After GST</th>
                                             <th class="no-sort">Action</th>
                                         </tr>
 
                                         </thead>
                                         <thead>
                                         <tr>
-                                            <th> </th>
-                                            <th> </th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
                                             <th></th>
                                             <th></th>
                                             <th></th>

@@ -22,7 +22,7 @@ class ExpenseData extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'date', 'name','detail','before_gst','gst','after_gst'
+        'date', 'name','detail','before_gst','gst','after_gst','gstn','invoice_number','invoice_date'
     ];
 
     
@@ -166,9 +166,13 @@ class ExpenseData extends Authenticatable
         }
 
 
+        $expensedata->invoice_date = date("Y-m-d H:i:s", strtotime($models['invoice_date']));
         $expensedata->date = date("Y-m-d H:i:s", strtotime($models['date']));
+        $expensedata->invoice_number = $models['invoice_number'];
         $expensedata->name = $models['name'];
         $expensedata->detail = $models['detail'];
+        $expensedata->gstn = $models['gstn'];
+        $expensedata->hsn_sac = $models['hsn_sac'];
         $expensedata->before_gst = $models['before_gst'];
         $expensedata->gst = $models['gst'];
         $expensedata->after_gst = $models['after_gst'];

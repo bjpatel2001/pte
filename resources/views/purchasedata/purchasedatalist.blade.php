@@ -63,6 +63,8 @@
                                             <th class="no-sort">Invoice Date</th>
                                             <th class="no-sort">Payment made Date</th>
                                             <th class="no-sort">Invoice Number</th>
+                                            <th class="no-sort">RTGS Number</th>
+                                            <th class="no-sort">Narration</th>
                                             <th class="no-sort">Quantity Number</th>
                                             <th class="no-sort">Per Voucher Prize</th>
                                             <th class="no-sort">Total Amount</th>
@@ -74,6 +76,8 @@
                                         <tr>
                                             <th> </th>
                                             <th> </th>
+                                            <th></th>
+                                            <th></th>
                                             <th></th>
                                             <th></th>
                                             <th></th>

@@ -1,5 +1,5 @@
 /**
- * Created by Nikhil Jain on 24-01-2017.
+ * Created by Brijesh on 24-01-2017.
  */
 
 app.dataTable = {
@@ -132,7 +132,18 @@ app.dataTable = {
                             }
                         });
 
-                        d.filterSelect = filterSelect;
+                        d.filterExport = filterExport;
+
+                        var filterExport = {};
+                        $.each($('input[name^="filterExport\\["]').serializeArray(), function () {
+                            if ($.trim(this.value) !== '') {
+                                var name = this.name.replace(/filterExport\[/, '');
+                                name = name.replace(/\]/, '');
+                                filterExport[name] = this.value;
+                            }
+                        });
+
+                        d.filterExport = filterExport;
 
                     }
                 }

@@ -95,9 +95,13 @@ class ExpenseDataController extends Controller
         foreach ($expensedataData as $expensedataData) {
             $row = array();
             $row[] = $i;
+            $row[] = $expensedataData->invoice_date;
             $row[] = $expensedataData->date;
+            $row[] = $expensedataData->invoice_number;
             $row[] = $expensedataData->name;
             $row[] = $expensedataData->detail;
+            $row[] = $expensedataData->gstn;
+            $row[] = $expensedataData->hsn_sac ;
             $row[] = $expensedataData->before_gst;
             $row[] = $expensedataData->gst;
             $row[] = $expensedataData->after_gst;

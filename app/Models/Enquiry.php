@@ -75,6 +75,11 @@ class Enquiry extends Authenticatable
         return $query->skip($request->start)->take($request->length)->get();
     }
 
+    public function scopeGetFilteredEnquiryData($query)
+    {
+        return $query->get();
+    }
+
     /**
      * scopeGetFilteredData from App/Models/Enquiry
      * get filterred enquirys

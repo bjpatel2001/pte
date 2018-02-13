@@ -36,51 +36,72 @@
                             <form action="{{url('/expense/update')}}" name="app_add_form" id="app_form" style="border-radius: 0px;" method="post" class="form-horizontal group-border-dashed">
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label">Expense Date<span class="error">*</span></label>
+                                    <label class="col-sm-4 control-label">Invoice Date<span class="error">*</span></label>
                                     <div class="col-sm-6 col-md-4">
-                                        <input type="text" name="date" id="date" placeholder="Expense Date" class="form-control input-sm required" value="{{$details->date}}" />
+                                        <input type="text" name="invoice_date" id="invoice_date" placeholder="Invoice Date" class="form-control input-sm required" value="{{$details->invoice_date}}" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Payment Date<span class="error">*</span></label>
+                                    <div class="col-sm-6 col-md-4">
+                                        <input type="text" name="date" id="date" placeholder="Payment Date" class="form-control input-sm required" value="{{$details->date}}" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Invoice Number<span class="error">*</span></label>
+                                    <div class="col-sm-6 col-md-4">
+                                        <input type="text" name="invoice_number" id="invoice_number" placeholder="Invoice Number" class="form-control input-sm required" value="{{$details->invoice_number}}" />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Name<span class="error">*</span></label>
                                     <div class="col-sm-6 col-md-4">
-                                        <input type="text" name="name" id="name" placeholder="Nmae" class="form-control input-sm required" value="{{$details->name}}" />
+                                        <input type="text" name="name" id="name" placeholder="Name" class="form-control input-sm required" value="{{$details->name}}" />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label">Detail<span class="error">*</span></label>
+                                    <label class="col-sm-4 control-label">Narration<span class="error">*</span></label>
                                     <div class="col-sm-6 col-md-4">
                                         <input type="text" name="detail" id="detail" placeholder="Detail" class="form-control input-sm required" value="{{$details->detail}}" />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="col-sm-4 control-label">GSTN<span class="error">*</span></label>
+                                    <div class="col-sm-6 col-md-4">
+                                        <input type="text" name="gstn" id="gstn" placeholder="GSTN" class="form-control input-sm required" value="{{$details->gstn}}" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">HSN/SAC<span class="error">*</span></label>
+                                    <div class="col-sm-6 col-md-4">
+                                        <input type="text" name="hsn_sac" id="hsn_sac" placeholder="HSN/SAC" class="form-control input-sm required" value="{{$details->hsn_sac}}" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-4 control-label">Amount Before GST<span class="error">*</span></label>
                                     <div class="col-sm-6 col-md-4">
                                         <input type="number" name="before_gst" id="before_gst" placeholder="Amount Before GST" class="form-control input-sm required" value="{{$details->before_gst}}" />
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">GST amount<span class="error">*</span></label>
                                     <div class="col-sm-6 col-md-4">
                                         <input type="number" name="gst" id="gst" placeholder="GST amount" class="form-control input-sm required" value="{{$details->gst}}" />
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Amount After GST<span class="error">*</span></label>
                                     <div class="col-sm-6 col-md-4">
                                         <input type="number" name="after_gst" id="after_gst" placeholder="Amount After GST" class="form-control input-sm required" value="{{$details->after_gst}}" />
                                     </div>
                                 </div>
-
                                 <input type="hidden" name="id" id="id" value="{{$details->id}}" />
-
                                 {{ csrf_field() }}
-
                                 <div class="col-sm-6 col-md-8 savebtn">
                                     <p class="text-right">
                                         <button type="submit" class="btn btn-space btn-info btn-lg">{{trans('app.edit')}} entry</button>
@@ -100,6 +121,7 @@
 <script>
     $( function() {
         $( "#date" ).datepicker({dateFormat: 'dd-mm-yy'});
+        $( "#invoice_date" ).datepicker({dateFormat: 'dd-mm-yy'});
 
     } );
 </script>

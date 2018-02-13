@@ -98,6 +98,8 @@ class PurchaseDataController extends Controller
             $row[] = date("d-m-Y", strtotime($purchasedataData->purchase_date));
             $row[] = date("d-m-Y", strtotime($purchasedataData->received_date));
             $row[] = $purchasedataData->invoice_number;
+            $row[] = $purchasedataData->rtgs;
+            $row[] = $purchasedataData->narration;
             $row[] = $purchasedataData->quantity;
             $row[] = $purchasedataData->per_voucher_prize;
             $row[] = $purchasedataData->total_amount;
@@ -170,6 +172,8 @@ class PurchaseDataController extends Controller
             'quantity' => 'required',
             'per_voucher_prize' => 'required',
             'total_amount' => 'required',
+            'rtgs' => 'required',
+            'narration' => 'required',
         );
 
         $validator = Validator::make($data, $rules);

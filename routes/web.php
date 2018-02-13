@@ -154,6 +154,8 @@ Route::group(['prefix' => 'offline'], function () {
     Route::get('/add-existing-agent-payment', 'OfflinePaymentController@addExistingAgentPayment');
     Route::post('/store-new-agent-payment', 'OfflinePaymentController@storeNewAgentPayment');
     Route::post('/store-existing-agent-payment', 'OfflinePaymentController@storeExistingAgentPayment');
+    Route::get('/edit/{id}', 'OfflinePaymentController@edit');
+    Route::post('/update-agent-payment', 'OfflinePaymentController@update');
     Route::post('/datatable', 'OfflinePaymentController@datatable');
     Route::post('/delete', 'OfflinePaymentController@delete');
 });
