@@ -159,6 +159,7 @@ class OfflinePaymentController extends Controller
             'number_of_voucher' => 'required',
             'rate' => 'required',
             'state' => 'required',
+            'payment_id' => 'required'
         );
         if ($mode == 'add-new-agent') {
             $rules = array(
@@ -168,6 +169,7 @@ class OfflinePaymentController extends Controller
                 'number_of_voucher' => 'required',
                 'rate' => 'required',
                 'state' => 'required',
+                'payment_id' => 'required'
             );
         }
 
@@ -176,7 +178,7 @@ class OfflinePaymentController extends Controller
                 'user_id' => 'required',
                 'number_of_voucher' => 'required',
                 'rate' => 'required',
-                'state' => 'required',
+                'payment_id' => 'required'
             );
         }
             if ($mode == 'edit-agent') {
@@ -187,6 +189,7 @@ class OfflinePaymentController extends Controller
                     'state' => 'required',
                     'email' => 'required|email',
                     'mobile' => 'required',
+                    'payment_id' => 'required'
                 );
             }
 
@@ -353,10 +356,10 @@ class OfflinePaymentController extends Controller
             if ($addpromo) {
 
 
-                $request->session()->flash('alert-success', __('app.default_edit_success', 'Entry updated successfully'));
+                $request->session()->flash('alert-success',"Entry updated successfully");
                 return redirect('offline/list');
             } else {
-                $request->session()->flash('alert-danger', __('app.default_error', 'Error updating entry'));
+                $request->session()->flash('alert-success',"Error updating entry");
                 return redirect('offline/edit/' . $request->get('id'))->withInput();
             }
         }

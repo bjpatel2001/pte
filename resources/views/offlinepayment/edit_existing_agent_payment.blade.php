@@ -61,7 +61,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Moile<span class="error">*</span></label>
                                     <div class="col-sm-6 col-md-4">
-                                        <input type="text" name="mobile" id="mobile" placeholder="Mobile" class="form-control input-sm required" value="{{$details->mobile}}" />
+                                        <input type="number" name="mobile" id="mobile" placeholder="Mobile" class="form-control input-sm required" value="{{$details->mobile}}" />
                                     </div>
                                 </div>
 

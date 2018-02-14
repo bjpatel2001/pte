@@ -40,7 +40,7 @@
                                     <div class="col-sm-6 col-md-4">
 
 
-                                        <textarea rows="8" cols="50" name="voucher_code"  class="form-control input-sm required"> </textarea>
+                                        <textarea rows="8" cols="50" name="voucher_code"  class="form-control input-sm required"></textarea>
                                     </div>
                                 </div>
 

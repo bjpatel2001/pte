@@ -68,7 +68,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Payment Id<span class="error">*</span></label>
                                     <div class="col-sm-6 col-md-4">
-                                        <input type="text" name="payment_request_id" id="payment_request_id" placeholder="Payment Id" class="form-control input-sm required" value="{{old('payment_request_id')}}" />
+                                        <input type="text" name="payment_id" id="payment_id" placeholder="Payment Id" class="form-control input-sm required" value="{{old('payment_id')}}" />
                                     </div>
                                 </div>
 
