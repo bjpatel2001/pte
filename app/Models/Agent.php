@@ -35,7 +35,7 @@ class Agent extends Authenticatable
     public function getCollection()
     {
 
-         $agent = Agent::select('tbl_agent.*')->orderBy('id', 'desc');
+         $agent = Agent::select('tbl_agent.*');
         return $agent->get();
     }
 
@@ -46,7 +46,7 @@ class Agent extends Authenticatable
      */
     public function getDatatableCollection()
     {
-       return Agent::select('tbl_agent.*')->orderBy('id', 'desc');
+       return Agent::select('tbl_agent.*');
     }
 
     /**
