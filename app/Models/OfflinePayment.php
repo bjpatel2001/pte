@@ -25,7 +25,7 @@ class OfflinePayment extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'name','mobile','state', 'created_by', 'updated_by'
+        'email', 'name','mobile','state', 'created_by', 'updated_by','client_gstn'
     ];
 
     
@@ -192,6 +192,7 @@ class OfflinePayment extends Authenticatable
 
        $payment =  OfflinePayment::create([
             'name' => $models['name'],
+            'client_gstn' => $models['client_gstn'],
             'created_at' => date('Y-m-d H:i:s'),
             'created_by' => Auth::user()->id,
             'email' => $models['email'],
@@ -240,6 +241,7 @@ class OfflinePayment extends Authenticatable
         $models['state'] = $agent_data->state;
         $models['mobile'] = $agent_data->mobile;
         $models['payment_request_id'] = 'OFFLINE';
+
         //For Storing the Enquiry first
         $enquiry = new Enquiry();
         $enquiry_data = $enquiry->addEnquiry($models);
@@ -371,6 +373,7 @@ class OfflinePayment extends Authenticatable
 
         }
         $agent_data->name = $models['name'];
+        $agent_data->client_gstn = $models['client_gstn'];
         $agent_data->email = $models['email'];
         $agent_data->mobile = $models['mobile'];
         $agent_data->state = $models['state'];

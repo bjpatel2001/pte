@@ -73,6 +73,13 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="col-sm-4 control-label">GSTN<span class="error">*</span></label>
+                                    <div class="col-sm-6 col-md-4">
+                                        <input type="text" name="client_gstn" id="client_gstn" placeholder="GSTN" class="form-control input-sm required" maxlength="15" value="{{old('client_gstn')}}" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label class="col-sm-4 control-label">State <span class="error">*</span></label>
                                     <div class="col-sm-6 col-md-4">
                                         <select class="form-control input-sm required" name="state" id="state">

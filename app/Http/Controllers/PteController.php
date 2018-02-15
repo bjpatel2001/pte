@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\SuccessMail;
+use App\Models\Agent;
 use App\Models\Enquiry;
 use App\Models\PendingVoucher;
 use App\Models\Prize;
@@ -25,6 +26,7 @@ class PteController extends Controller
     protected $enquiry;
     protected $saleData;
     protected $pendingVoucher;
+    protected $agent;
 
 
     /**
@@ -32,7 +34,7 @@ class PteController extends Controller
      *
      */
     public function __construct(Pte $pte, Promo $promo, Prize $prize, Enquiry $enquiry,
-                                PendingVoucher $pendingVoucher,SaleData $saleData)
+                                PendingVoucher $pendingVoucher,SaleData $saleData,Agent $agent)
     {
         // $this->middleware(['auth', 'checkRole']);
         $this->pte = $pte;
@@ -41,6 +43,7 @@ class PteController extends Controller
         $this->enquiry = $enquiry;
         $this->saleData = $saleData;
         $this->pendingVoucher = $pendingVoucher;
+        $this->agent = $agent;
 
     }
 
@@ -92,16 +95,29 @@ class PteController extends Controller
             return redirect('/')->withInput();
         }
 
-        //Get the current rate of voucher
-        $current_prize_data = $this->prize->getFirstPrize();
-        if (count($current_prize_data) > 0) {
-            $current_prize = $current_prize_data->rate;
-            $request_data['rate'] = $current_prize_data->rate;
-            $request_data['amount'] = $buying_quantity * $current_prize;
-        } else {
-            $request->session()->flash('alert-danger', 'Voucher prize is not available please visit after some time');
-            return redirect('/')->withInput();
+        if(isset($request_data['user_id']) && !empty($request_data['user_id'])){
+            $agent_data = $this->agent->getAgentByField($request_data['user_id'],'id');
+            if (count($agent_data) > 0) {
+                $current_prize = $agent_data->amount;
+                $request_data['rate'] = $agent_data->amount;
+                $request_data['amount'] = $buying_quantity * $current_prize;
+                dd($request_data);
+            } else {
+                $request->session()->flash('alert-danger', 'Voucher prize is not available please visit after some time');
+                return redirect('/')->withInput();
+            }
+        }else {
+            $current_prize_data = $this->prize->getFirstPrize();
+            if (count($current_prize_data) > 0) {
+                $current_prize = $current_prize_data->rate;
+                $request_data['rate'] = $current_prize_data->rate;
+                $request_data['amount'] = $buying_quantity * $current_prize;
+            } else {
+                $request->session()->flash('alert-danger', 'Voucher prize is not available please visit after some time');
+                return redirect('/')->withInput();
+            }
         }
+        //Get the current rate of voucher
 
         $ch = curl_init();
 
@@ -249,7 +265,7 @@ class PteController extends Controller
                                 $customer_email_data['voucher_to_send'] = implode(",", $voucher_to_send);
                                 $customer_email_data['date'] = date('d-m-Y');
                                 $customer_email_data['type'] = 'customer';
-                                Mail::send(new SuccessMail($customer_email_data));
+                                Mail ::send(new SuccessMail($customer_email_data));
                                 //Prepare data for admin
                                 sleep(5);
                                 $admin_email_data = [];

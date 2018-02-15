@@ -177,20 +177,28 @@ class SaleDataController extends Controller
          * @return mixed
          */
         $saledataData = $saledataData->GetSaleDataData($request);
+
         $appData = array();
         foreach ($saledataData as $saledataData) {
 
             $row = array();
             $amount_paid = $saledataData->amount_paid;
             $row[] = date("d-m-Y H:i:s", strtotime($saledataData->created_at));
+            $row[] = $saledataData->invoice_number;
             $row[] = (isset($saledataData->Enquiry)) ? $saledataData->Enquiry->name : "---";
             $row[] = (isset($saledataData->Enquiry)) ? $saledataData->Enquiry->email : "---";
             $row[] = (isset($saledataData->Enquiry)) ? $saledataData->Enquiry->mobile : "---";
+            $row[] = $saledataData->client_gstn;
+            $row[] = 'HSN/SAC';
             $row[] = $saledataData->voucher_code;
+            $row[] = $saledataData->number_of_voucher;
             $row[] = $saledataData->payment_code;
             $row[] = $amount_paid - ($saledataData->amount_paid * 0.18);
             $row[] = $saledataData->amount_paid;
-            $row[] = (isset($saledataData->Enquiry) && $saledataData->Enquiry->state == 5) ? 'SGST:'.$saledataData->amount_paid * 0.18 : 'SGST:'.$amount_paid * 0.09.'<br>'.'CGST:'.$amount_paid * 0.09.'<br>'.'IGST:-';
+            $row[] =  $saledataData->state ;
+            $row[] = (isset($saledataData->Enquiry) && $saledataData->Enquiry->state == 5) ? 'SGST:'.$saledataData->amount_paid * 0.18 : 'SGST:'.$amount_paid * 0.09;
+            $row[] = (isset($saledataData->Enquiry) && $saledataData->Enquiry->state == 5) ? '-' : 'CGST:'.$amount_paid * 0.09;
+            $row[] = 'IGST:-';
             $appData[] = $row;
         }
 

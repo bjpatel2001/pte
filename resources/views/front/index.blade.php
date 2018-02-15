@@ -47,15 +47,15 @@
                                         </select>
 
                                         <input type="text" name="name" id="name" placeholder="Name"
-                                               class="form-control" value="{{old('name')}}" required/>
+                                               class="form-control" value="{{$name or ''}}" required/>
 
                                         <input type="email" name="email" id="email" placeholder="Email"
-                                               class="form-control" value="{{old('email')}}" required/>
+                                               class="form-control" value="{{$email or ''}}" required/>
 
                                     </div>
                                     <div class="col-xs-6">
-                                        <input type="text" name="mobile" id="mobile" placeholder="Mobile"
-                                               class="form-control" value="{{old('mobile')}}" required/>
+                                        <input type="text" name="mobile" id="mobile" placeholder="Mobile" maxlength="10" minlength="10"
+                                               class="form-control" value="{{$mobile or ''}}" required/>
                                         <select class="form-control" name="number_of_voucher" id="number_of_voucher"
                                                 value="{{old('number_of_voucher')}} required>
                                                 <option value=">QTY.No of Discounted PTE Voucher</option>
@@ -76,6 +76,7 @@
                                         <h5 style="color:#fff;text-align:left;">Code Will Be Sent Out On Your Email
                                             Immediately.</h5>
                                     </div>
+                                    <input type="hidden" name="user_id" value="{{$user_id or ''}}">
 
                                 </div>
                                 {{ csrf_field() }}

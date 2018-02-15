@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use DB;
 
 
 
@@ -22,7 +23,7 @@ class SaleData extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'enquiry_id', 'voucher_id', 'payment_code', 'rate','amount_paid','number_of_voucher'
+        'enquiry_id', 'voucher_id', 'payment_code', 'rate','amount_paid','number_of_voucher','invoice_number','client_gstn'
     ];
 
     public function Enquiry()
@@ -51,7 +52,8 @@ class SaleData extends Authenticatable
     public function getDatatableCollection()
     {
        return SaleData::join('tbl_enquiry', 'tbl_enquiry.id', '=', 'tbl_sale_data.enquiry_id')
-            ->select('tbl_enquiry.name','tbl_enquiry.email','tbl_enquiry.mobile', 'tbl_sale_data.*');
+           ->join('tbl_state','tbl_state.id','=','tbl_enquiry.state')
+            ->select('tbl_enquiry.name','tbl_enquiry.email','tbl_enquiry.mobile','tbl_state.name as state', 'tbl_sale_data.*');
     }
 
     /**
@@ -164,8 +166,17 @@ class SaleData extends Authenticatable
     public function addSaleData(array $models = [])
     {
 
+
+        //For Generating the Invoice number
+        $invoice_number = $this->generateInvoiceNumber();
         $saledata = new SaleData;
+        if(isset($models['client_gstn']) && !empty($models['client_gstn'])) {
+            $saledata->client_gstn =  $models['client_gstn'];
+        }else {
+            $saledata->client_gstn = 'NONE';
+        }
         $saledata->created_at = date('Y-m-d H:i:s');
+        $saledata->invoice_number = $invoice_number;
         $saledata->voucher_id = $models['voucher_id'];
         $saledata->voucher_code = $models['voucher_code'];
         $saledata->instamojo_fee = $models['instamojo_fee'];
@@ -251,6 +262,27 @@ class SaleData extends Authenticatable
     {
         $return = SaleData::where('status', 0)->take($count)->get();
         return $return;
+    }
+
+    /*
+     * Generate the Invoice number
+     *
+     * */
+    public function generateInvoiceNumber()
+    {
+        $sale_data_count = DB::select('select id from tbl_sale_data ORDER BY id DESC limit 1');
+        if($sale_data_count) {
+            $last_sale_data = $sale_data_count[0]->id;
+            $new_invoice_number = (float)$last_sale_data + 1;
+            $current_year = date('Y');
+            $invoice_number = 'INV_'.$current_year.'_'.$new_invoice_number;
+            return $invoice_number;
+        }else {
+
+            $current_year = date('Y');
+            $invoice_number = 'INV_'.$current_year.'_1';
+            return $invoice_number;
+        }
     }
 
 }

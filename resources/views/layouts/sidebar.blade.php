@@ -77,7 +77,14 @@
                                 </li>
                             </ul>
                         </li>
-
+                        <li class="parent {{$agentManagementTab or ''}}" title="Agent Management"><a href="#"><i
+                                        class="icon mdi mdi-quote mdi-18px"></i><span>Agent Management</span></a>
+                            <ul class="sub-menu">
+                                <li class="{{$agentTab or ''}}">
+                                    <a href="{{url('agent/list')}}">Agent Management</a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="parent {{$saledataManagementTab or ''}}" title="{{trans('app.sale_data_managment')}}"><a href="#"><i
                                         class="icon mdi mdi-quote mdi-18px"></i><span>{{trans('app.sale_data_managment')}}</span></a>
                             <ul class="sub-menu">

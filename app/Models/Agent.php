@@ -8,11 +8,11 @@ use Auth;
 
 
 
-class ExpenseData extends Authenticatable
+class Agent extends Authenticatable
 {
     use Notifiable;
    
-    protected $table = 'tbl_expense_data';
+    protected $table = 'tbl_agent';
     protected $primaryKey = 'id';
     
 
@@ -22,7 +22,7 @@ class ExpenseData extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'date', 'name','detail','before_gst','gst','after_gst','gstn','invoice_number','invoice_date'
+        'name', 'email','amount','mobile',
     ];
 
     
@@ -35,8 +35,8 @@ class ExpenseData extends Authenticatable
     public function getCollection()
     {
 
-         $expensedata = ExpenseData::select('tbl_expense_data.*')->orderBy('date', 'desc');
-        return $expensedata->get();
+         $agent = Agent::select('tbl_agent.*')->orderBy('id', 'desc');
+        return $agent->get();
     }
 
     /**
@@ -46,19 +46,19 @@ class ExpenseData extends Authenticatable
      */
     public function getDatatableCollection()
     {
-       return ExpenseData::select('tbl_expense_data.*')->orderBy('date', 'desc');
+       return Agent::select('tbl_agent.*')->orderBy('id', 'desc');
     }
 
     /**
-     * Query to get expensedata total count
+     * Query to get agent total count
      *
      * @param $dbObject
-     * @return integer $expensedataCount
+     * @return integer $agentCount
      */
-    public static function getExpenseDataCount($dbObject)
+    public static function getAgentCount($dbObject)
     {
-        $expensedataCount = $dbObject->count();
-        return $expensedataCount;
+        $agentCount = $dbObject->count();
+        return $agentCount;
     }
 
     /**
@@ -68,14 +68,14 @@ class ExpenseData extends Authenticatable
      * @param  Request $request
      * @return $query
      */
-    public function scopeGetExpenseDataData($query, $request)
+    public function scopeGetAgentData($query, $request)
     {
         return $query->skip($request->start)->take($request->length)->get();
     }
 
     /**
-     * scopeGetFilteredData from App/Models/ExpenseData
-     * get filterred expensedatas
+     * scopeGetFilteredData from App/Models/Agent
+     * get filterred agents
      *
      * @param  object $query
      * @param  \Illuminate\Http\Request $request
@@ -130,10 +130,10 @@ class ExpenseData extends Authenticatable
      * @param  Request $request
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeSortExpenseDataData($query, $request)
+    public function scopeSortAgentData($query, $request)
     {
 
-        return $query->orderBy(config('constant.expensedataDataTableFieldArray')[$request->order['0']['column']], $request->order['0']['dir']);
+        return $query->orderBy(config('constant.agentDataTableFieldArray')[$request->order['0']['column']], $request->order['0']['dir']);
 
     }
 
@@ -151,65 +151,57 @@ class ExpenseData extends Authenticatable
     }
 
     /**
-     * Add & update ExpenseData addExpenseData
+     * Add & update Agent addAgent
      *
      * @param array $models
      * @return boolean true | false
      */
-    public function addExpenseData(array $models = [])
+    public function addAgent(array $models = [])
     {
         if (isset($models['id'])) {
-            $expensedata = ExpenseData::find($models['id']);
+            $agent = Agent::find($models['id']);
         } else {
-            $expensedata = new ExpenseData;
-            $expensedata->created_at = date('Y-m-d H:i:s');
+            $agent = new Agent;
+            $agent->created_at = date('Y-m-d H:i:s');
         }
 
+       
 
-        $expensedata->invoice_date = date("Y-m-d H:i:s", strtotime($models['invoice_date']));
-        $expensedata->date = date("Y-m-d H:i:s", strtotime($models['date']));
-        $expensedata->invoice_number = $models['invoice_number'];
-        $expensedata->name = $models['name'];
-        $expensedata->detail = $models['detail'];
-        $expensedata->gstn = $models['gstn'];
-        $expensedata->hsn_sac = $models['hsn_sac'];
-        $expensedata->before_gst = $models['before_gst'];
-        $expensedata->gst = $models['gst'];
-        $expensedata->after_gst = $models['after_gst'];
+        $agent->name = $models['name'];
+        $agent->email = $models['email'];
+        $agent->amount = $models['amount'];
+        $agent->mobile = $models['mobile'];
+        $agent->updated_at = date('Y-m-d H:i:s');
+        $agentId = $agent->save();
 
-
-
-        $expensedata->updated_at = date('Y-m-d H:i:s');
-        $expensedataId = $expensedata->save();
-
-        if ($expensedataId) {
-            return $expensedata;
+        if ($agentId) {
+            return $agent;
         } else {
             return false;
         }
     }
 
     /**
-     * get ExpenseData By fieldname getExpenseDataByField
+     * get Agent By fieldname getAgentByField
      *
      * @param mixed $id
      * @param string $field_name
      * @return mixed
      */
-    public function getExpenseDataByField($id, $field_name)
+    public function getAgentByField($id, $field_name)
     {
-        return ExpenseData::where($field_name, $id)->first();
+        return Agent::where($field_name, $id)->first();
     }
 
     /**
-     * Delete ExpenseData
+     * Delete Agent
      *
      * @param int $id
      * @return boolean true | false
      */
-    public function deleteExpenseData($id)
+    public function deleteAgent($id)
     {
-        $delete = ExpenseData::where('id', $id)->delete();
+        $delete = Agent::where('id', $id)->delete();
         if ($delete)
             return true;
         else

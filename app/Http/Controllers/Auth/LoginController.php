@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Agent;
 use App\Models\Detail;
 use App\Models\Prize;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -77,26 +78,54 @@ class LoginController extends Controller
      *
      * @return view
      */
-    public function welcome()
+    public function welcome(Request $request)
     {
-        $state_model = new State();
-        $data['state'] = $state_model->getCollection();
-        $detail_model = new Detail();
-        //For saved prize and detail
-        $data_saved_prize = $detail_model->getData();
-        if(!empty($data_saved_prize)) {
-            $data['title'] = $data_saved_prize->page_title;
-            $data['saved_prize'] = $data_saved_prize->saved_prize;
+       $user_id = $request->all();
+
+        if(isset($user_id) && !empty($user_id)) {
+            $state_model = new State();
+            $data['state'] = $state_model->getCollection();
+            $data['user_id'] = $user_id['user_id'];
+            $detail_model = new Detail();
+            //For saved prize and detail
+            $data_saved_prize = $detail_model->getData();
+            if(!empty($data_saved_prize)) {
+                $data['title'] = $data_saved_prize->page_title;
+                $data['saved_prize'] = $data_saved_prize->saved_prize;
+            }
+            $user_detail = new Agent();
+            $user_data = $user_detail->getAgentByField($user_id['user_id'],'id');
+            if(!empty($user_data)) {
+                $data['rate'] =   floor($user_data->amount);
+                $data['email'] =   $user_data->email;
+                $data['name'] =   $user_data->name;
+                $data['mobile'] =   $user_data->mobile;
+            }
+
+        }else {
+            $state_model = new State();
+            $data['state'] = $state_model->getCollection();
+            $detail_model = new Detail();
+            //For saved prize and detail
+            $data_saved_prize = $detail_model->getData();
+            if(!empty($data_saved_prize)) {
+                $data['title'] = $data_saved_prize->page_title;
+                $data['saved_prize'] = $data_saved_prize->saved_prize;
+            }
+            //For prize
+            $prize_model = new Prize();
+            $prize_data = $prize_model->getFirstPrize();
+            if(!empty($prize_data)) {
+                $data['rate'] =   floor($prize_data->rate);
+            }
         }
-       //For prize
-        $prize_model = new Prize();
-        $prize_data = $prize_model->getFirstPrize();
-        if(!empty($prize_data)) {
-            $data['rate'] =   floor($prize_data->rate);
-        }
+
         return view('front.index',$data);
     }
-
+    public function hello()
+    {
+        return view('test');
+    }
     /**
      * How to book view page
      *

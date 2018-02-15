@@ -12,14 +12,13 @@
 */
 
 Auth::routes();
-Route::get('/', 'Auth\LoginController@welcome')->name('welcome');
+Route::get('/', 'Auth\LoginController@welcome');
 Route::get('/how-to-book', 'Auth\LoginController@howToBook');
 Route::get('/pte-faq', 'Auth\LoginController@pteFaq');
 Route::get('/refund-policy', 'Auth\LoginController@refundPolicy');
 Route::get('/contact-us', 'Auth\LoginController@contactUs');
 Route::get('/thankyou', 'Auth\LoginController@thankYou');
 Route::post('/send-query', 'Auth\LoginController@sendQuery');
-
 
 Route::get('/backend', function () {
     return Redirect::to('login');
@@ -117,6 +116,18 @@ Route::group(['prefix' => 'purchase'], function () {
     Route::post('/store', 'PurchaseDataController@store');
     Route::post('/update', 'PurchaseDataController@update');
     Route::post('/datatable', 'PurchaseDataController@datatable');
+});
+
+Route::group(['prefix' => 'agent'], function () {
+
+    Route::any('/list', 'AgentController@index');
+    Route::get('/add', 'AgentController@create');
+    Route::get('/edit/{id}', 'AgentController@edit');
+    Route::post('/delete', 'AgentController@delete');
+    Route::post('/store', 'AgentController@store');
+    Route::post('/update', 'AgentController@update');
+    Route::post('/send-mail', 'AgentController@sendMail');
+    Route::post('/datatable', 'AgentController@datatable');
 });
 
 Route::group(['prefix' => 'expense'], function () {

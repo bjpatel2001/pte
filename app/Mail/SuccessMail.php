@@ -49,6 +49,10 @@ class SuccessMail extends Mailable
             $to = $this->successData['email'];
             $view = 'emails.mock_test';
             $subject = 'PTE Mock Test';
+        }elseif ($this->successData['type'] == 'agent_mail') {
+            $to = $this->successData['email'];
+            $view = 'emails.agent';
+            $subject = 'PTE Promo Code Special Discount Link';
         }
 
         return $this->view($view)

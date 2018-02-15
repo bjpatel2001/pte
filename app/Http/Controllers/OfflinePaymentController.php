@@ -159,7 +159,8 @@ class OfflinePaymentController extends Controller
             'number_of_voucher' => 'required',
             'rate' => 'required',
             'state' => 'required',
-            'payment_id' => 'required'
+            'payment_id' => 'required',
+            'client_gstn' => 'required',
         );
         if ($mode == 'add-new-agent') {
             $rules = array(
@@ -169,7 +170,8 @@ class OfflinePaymentController extends Controller
                 'number_of_voucher' => 'required',
                 'rate' => 'required',
                 'state' => 'required',
-                'payment_id' => 'required'
+                'payment_id' => 'required',
+                'client_gstn' => 'required',
             );
         }
 
@@ -178,7 +180,9 @@ class OfflinePaymentController extends Controller
                 'user_id' => 'required',
                 'number_of_voucher' => 'required',
                 'rate' => 'required',
-                'payment_id' => 'required'
+                'payment_id' => 'required',
+
+
             );
         }
             if ($mode == 'edit-agent') {
@@ -189,7 +193,7 @@ class OfflinePaymentController extends Controller
                     'state' => 'required',
                     'email' => 'required|email',
                     'mobile' => 'required',
-                    'payment_id' => 'required'
+                    'client_gstn' => 'required',
                 );
             }
 
