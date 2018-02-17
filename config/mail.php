@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => 'bjpatel2001@gmail.com',
-        'name' => 'PteVouchercode.com',
+        'address' => 'info@compassoverseas.com',
+        'name' => 'PTE Promocode.com',
     ],
 
     /*
