@@ -35,7 +35,7 @@ class ExpenseData extends Authenticatable
     public function getCollection()
     {
 
-         $expensedata = ExpenseData::select('tbl_expense_data.*')->orderBy('date', 'desc');
+         $expensedata = ExpenseData::select('tbl_expense_data.*');
         return $expensedata->get();
     }
 
@@ -46,7 +46,7 @@ class ExpenseData extends Authenticatable
      */
     public function getDatatableCollection()
     {
-       return ExpenseData::select('tbl_expense_data.*')->orderBy('date', 'desc');
+       return ExpenseData::select('tbl_expense_data.*');
     }
 
     /**

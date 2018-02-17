@@ -80,7 +80,7 @@ class PurchaseDataController extends Controller
         if (isset(config('constant.purchasedataDataTableFieldArray')[$request->order['0']['column']])) {
             $purchasedataData = $purchasedataData->SortPurchaseDataData($request);
         } else {
-            $purchasedataData = $purchasedataData->SortDefaultDataByRaw('tbl_purchase_data.id', 'desc');
+            $purchasedataData = $purchasedataData->SortDefaultDataByRaw('tbl_purchase_data.received_date', 'desc');
         }
 
         /**

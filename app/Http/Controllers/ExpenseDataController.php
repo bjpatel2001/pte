@@ -80,7 +80,7 @@ class ExpenseDataController extends Controller
         if (isset(config('constant.expensedataDataTableFieldArray')[$request->order['0']['column']])) {
             $expensedataData = $expensedataData->SortExpenseDataData($request);
         } else {
-            $expensedataData = $expensedataData->SortDefaultDataByRaw('tbl_expense_data.id', 'desc');
+            $expensedataData = $expensedataData->SortDefaultDataByRaw('tbl_expense_data.date', 'desc');
         }
 
         /**
