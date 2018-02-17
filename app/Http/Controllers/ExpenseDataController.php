@@ -92,11 +92,12 @@ class ExpenseDataController extends Controller
         $expensedataData = $expensedataData->GetExpenseDataData($request);
         $appData = array();
         $i = 1;
+
         foreach ($expensedataData as $expensedataData) {
             $row = array();
             $row[] = $i;
-            $row[] = $expensedataData->invoice_date;
-            $row[] = $expensedataData->date;
+            $row[] = date("d-m-Y", strtotime($expensedataData->invoice_date));
+            $row[] = date("d-m-Y", strtotime($expensedataData->date));
             $row[] = $expensedataData->invoice_number;
             $row[] = $expensedataData->name;
             $row[] = $expensedataData->detail;

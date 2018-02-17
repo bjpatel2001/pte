@@ -35,7 +35,7 @@ class PurchaseData extends Authenticatable
     public function getCollection()
     {
 
-         $purchasedata = PurchaseData::select('tbl_purchase_data.*')->orderBy('received_date', 'desc');
+         $purchasedata = PurchaseData::select('tbl_purchase_data.*');
         return $purchasedata->get();
     }
 
