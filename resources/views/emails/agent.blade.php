@@ -163,7 +163,7 @@
                                                         <td align="center" valign="middle" class="mcnButtonContent"
                                                             style="font-family: Helvetica;font-size: 18px;padding: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                                                             <a class="mcnButton " title="Buy Discounted PTE Promo Code"
-                                                               href="{{ URL('/?user_id'.$successData['id'] )}}" target="_blank"
+                                                               href="{{ URL('/?user_id='.$successData['id'] )}}" target="_blank"
                                                                style="font-weight: bold;letter-spacing: -0.5px;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;display: block;">Buy
                                                                 PTE Promo Code @ {{$successData['amount']}}</a>
                                                         </td>
