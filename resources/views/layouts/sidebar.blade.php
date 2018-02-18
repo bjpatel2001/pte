@@ -31,38 +31,42 @@
                             </li>
                         @endif
 
-                          <li class="parent {{$promoManagementTab or ''}}" title="{{trans('app.voucher_managment')}}"><a href="#"><i
-                                        class="icon mdi mdi-quote mdi-18px"></i><span>{{trans('app.voucher_managment')}}</span></a>
-                            <ul class="sub-menu">
-                                <li class="{{$promoTab or ''}}">
-                                    <a href="{{url('voucher/list')}}">{{trans('app.voucher_managment')}}</a>
-                                </li>
-                           </ul>
+                        <li class="{{$enquiryTab or ''}}">
+                            <a href="{{url('enquiry/list')}}">{{trans('app.enquiry_managment')}}</a>
                         </li>
 
-                        <li class="parent {{$enquiryManagementTab or ''}}" title="{{trans('app.enquiry_managment')}}"><a href="#"><i
-                                        class="icon mdi mdi-quote mdi-18px"></i><span>{{trans('app.enquiry_managment')}}</span></a>
-                            <ul class="sub-menu">
-                                <li class="{{$enquiryTab or ''}}">
-                                    <a href="{{url('enquiry/list')}}">{{trans('app.enquiry_managment')}}</a>
-                                </li>
-                            </ul>
+                        <li class="{{$promoTab or ''}}">
+                            <a href="{{url('voucher/list')}}">{{trans('app.voucher_managment')}}</a>
                         </li>
 
-                        <li class="parent {{$prizeManagementTab or ''}}" title="{{trans('app.prize_managment')}}"><a href="#"><i
-                                        class="icon mdi mdi-quote mdi-18px"></i><span>{{trans('app.prize_managment')}}</span></a>
+                        <li class="parent {{$prizeManagementTab or ''}}" title="Web site management"><a href="#"><i
+                                        class="icon mdi mdi-quote mdi-18px"></i><span>Web site management</span></a>
                             <ul class="sub-menu">
                                 <li class="{{$prizeTab or ''}}">
                                     <a href="{{url('prize/add')}}">{{trans('app.prize_managment')}}</a>
                                 </li>
+                                <li class="{{$detailTab or ''}}">
+                                    <a href="{{url('detail/add')}}">{{trans('app.detail_managment')}}</a>
+                                </li>
                             </ul>
                         </li>
 
-                        <li class="parent {{$detailManagementTab or ''}}" title="{{trans('app.detail_managment')}}"><a href="#"><i
+                        {{--<li class="parent {{$detailManagementTab or ''}}" title="{{trans('app.detail_managment')}}"><a href="#"><i
                                         class="icon mdi mdi-quote mdi-18px"></i><span>{{trans('app.detail_managment')}}</span></a>
                             <ul class="sub-menu">
                                 <li class="{{$detailTab or ''}}">
                                     <a href="{{url('detail/add')}}">{{trans('app.detail_managment')}}</a>
+                                </li>
+                            </ul>
+                        </li>--}}
+                        <li class="parent {{$saledataManagementTab or ''}}" title="{{trans('app.sale_data_managment')}}"><a href="#"><i
+                                        class="icon mdi mdi-quote mdi-18px"></i><span>{{trans('app.sale_data_managment')}}</span></a>
+                            <ul class="sub-menu">
+                                <li class="{{$saledataTab or ''}}">
+                                    <a href="{{url('saledata/list')}}">{{trans('app.sale_data')}}</a>
+                                </li>
+                                <li class="{{$invoicedataTab or ''}}">
+                                    <a href="{{url('saledata/invoice-list')}}">{{trans('app.invoice_data')}}</a>
                                 </li>
                             </ul>
                         </li>
@@ -77,55 +81,31 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="parent {{$agentManagementTab or ''}}" title="Agent Management"><a href="#"><i
-                                        class="icon mdi mdi-quote mdi-18px"></i><span>Agent Management</span></a>
+                        <li class="parent {{$agentManagementTab or ''}}" title="Discount Link"><a href="#"><i
+                                        class="icon mdi mdi-quote mdi-18px"></i><span>Discount Link</span></a>
                             <ul class="sub-menu">
                                 <li class="{{$agentTab or ''}}">
-                                    <a href="{{url('agent/list')}}">Agent Management</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="parent {{$saledataManagementTab or ''}}" title="{{trans('app.sale_data_managment')}}"><a href="#"><i
-                                        class="icon mdi mdi-quote mdi-18px"></i><span>{{trans('app.sale_data_managment')}}</span></a>
-                            <ul class="sub-menu">
-                                <li class="{{$saledataTab or ''}}">
-                                    <a href="{{url('saledata/list')}}">{{trans('app.sale_data')}}</a>
-                                </li>
-                                <li class="{{$invoicedataTab or ''}}">
-                                    <a href="{{url('saledata/invoice-list')}}">{{trans('app.invoice_data')}}</a>
+                                    <a href="{{url('agent/list')}}">Discount Link Management</a>
                                 </li>
                             </ul>
                         </li>
 
-                        <li class="parent {{$purchasedataManagementTab or ''}}" title="Purchase Data Managment"><a href="#"><i
-                                        class="icon mdi mdi-quote mdi-18px"></i><span>PurchaseDataManagment</span></a>
-                            <ul class="sub-menu">
-                                <li class="{{$purchasedataTab or ''}}">
-                                    <a href="{{url('purchase/list')}}">Purchase Data</a>
-                                </li>
-                                <li class="{{$expenseDataTab or ''}}">
-                                    <a href="{{url('expense/list')}}">Expense Data</a>
-                                </li>
-                            </ul>
+                        <li class="{{$purchasedataTab or ''}}">
+                            <a href="{{url('purchase/list')}}">Purchase Data</a>
+                        </li>
+                        <li class="{{$expenseDataTab or ''}}">
+                            <a href="{{url('expense/list')}}">Expense Data</a>
                         </li>
 
                         <li title="Reports"><a href="{{url('/maintanance')}}"><i class="icon fa fa-file-text-o"
                                                                                  aria-hidden="true"></i><span>{{trans('app.reports')}}</span></a>
                         </li>
 
-                        <li title="profile" class="{{$profileTab or ''}}"><a href="{{url('/user/profile')}}"><i
-                                        class="icon mdi mdi-face"></i></i><span>{{trans('app.my_profile')}}</span></a>
-                        </li>
-                        <li title="Change Password" class="{{$changePasswordTab or ''}}"><a
-                                    href="{{url('/change-password')}}"><i class="icon mdi mdi-lock"></i></i>
-                                <span>{{trans('app.change_password')}}</span></a>
-                        </li>
 
                     </ul>
-                    </li>
-                    </ul>
-                    </li>
-                    </ul>
+
+
+
                 </div>
             </div>
         </div>

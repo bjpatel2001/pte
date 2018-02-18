@@ -194,11 +194,12 @@ class SaleDataController extends Controller
             $row[] = $saledataData->number_of_voucher;
             $row[] = $saledataData->payment_code;
             $row[] = $amount_paid - ($saledataData->amount_paid * 0.18);
+            $row[] = (isset($saledataData->Enquiry) && $saledataData->Enquiry->state == 5) ? 'SGST:'.$amount_paid * 0.09 : '-' ;
+            $row[] = (isset($saledataData->Enquiry) && $saledataData->Enquiry->state == 5) ? 'CGST:'.$amount_paid * 0.09 : '-' ;
+            $row[] = (isset($saledataData->Enquiry) && $saledataData->Enquiry->state == 5) ? '-' :  'IGST:' .$amount_paid * 0.18;
             $row[] = $saledataData->amount_paid;
             $row[] =  $saledataData->state ;
-            $row[] = (isset($saledataData->Enquiry) && $saledataData->Enquiry->state == 5) ? 'SGST:'.$saledataData->amount_paid * 0.18 : 'SGST:'.$amount_paid * 0.09;
-            $row[] = (isset($saledataData->Enquiry) && $saledataData->Enquiry->state == 5) ? '-' : 'CGST:'.$amount_paid * 0.09;
-            $row[] = 'IGST:-';
+
             $appData[] = $row;
         }
 

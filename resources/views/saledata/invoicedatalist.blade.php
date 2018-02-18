@@ -64,11 +64,12 @@
                                             <th>Quantity</th>
                                             <th>Trans Id</th>
                                             <th>Before GST</th>
-                                            <th>After GST</th>
-                                            <th>State</th>
                                             <th>SGST</th>
                                             <th>CGST</th>
                                             <th>IGST</th>
+                                            <th>After GST</th>
+                                            <th>State</th>
+
 
                                         </tr>
 
