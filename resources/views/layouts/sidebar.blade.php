@@ -81,15 +81,9 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="parent {{$agentManagementTab or ''}}" title="Discount Link"><a href="#"><i
-                                        class="icon mdi mdi-quote mdi-18px"></i><span>Discount Link</span></a>
-                            <ul class="sub-menu">
                                 <li class="{{$agentTab or ''}}">
                                     <a href="{{url('agent/list')}}">Discount Link Management</a>
                                 </li>
-                            </ul>
-                        </li>
-
                         <li class="{{$purchasedataTab or ''}}">
                             <a href="{{url('purchase/list')}}">Purchase Data</a>
                         </li>
