@@ -15938,7 +15938,9 @@ form.dropzone .note {
 	left: 83px;
 	bottom: 32px;
 }
-
+.dataTables_wrapper {
+	overflow-x: scroll ;
+}
 
 /*
 #app_form .control-label{
