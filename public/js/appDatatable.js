@@ -8,7 +8,6 @@ app.dataTable = {
     settings: function (param) {
         $.fn.dataTable.ext.errMode = 'none';
         dataTable = $(param.id).DataTable({
-            responsive: true,
             responsive: {
                 details: false
             },
