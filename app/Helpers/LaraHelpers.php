@@ -22,16 +22,28 @@ class LaraHelpers
         foreach (Auth::user()->UserPermission as $row) {
             $userPermission[] = $permission->getPermissionByField($row->permission_id, 'id')->code;
         }
-        if (in_array(Auth::user()->role_id, [1, 2])) {
-            $userPermission[] = "system_log";
-            $userPermission[] = "country_management";
-            $userPermission[] = "state_management";
-            $userPermission[] = "division_management";
-            $userPermission[] = "service_management";
-            $userPermission[] = "sla_management";
-            $userPermission[] = "client_contact_management";
-            $userPermission[] = "placement_management";
-            $userPermission[] = "settings";
+        if (in_array(Auth::user()->role_id, [1])) {
+
+            $userPermission[] = "enquiry_data";
+            $userPermission[] = "master_manage";
+            $userPermission[] = "sale_data";
+            $userPermission[] = "invoice_data";
+            $userPermission[] = "purchase_data";
+            $userPermission[] = "expense_data";
+            $userPermission[] = "agent_data";
+            $userPermission[] = "detail_management";
+            $userPermission[] = "voucher_data";
+            // $userPermission[] = "industry_management";
+        }
+        if (in_array(Auth::user()->role_id, [4])) {
+            $userPermission[] = "enquiry_data";
+            // $userPermission[] = "industry_management";
+        }
+        if (in_array(Auth::user()->role_id, [5])) {
+            $userPermission[] = "sale_data";
+            $userPermission[] = "invoice_data";
+            $userPermission[] = "purchase_data";
+            $userPermission[] = "expense_data";
             // $userPermission[] = "industry_management";
         }
 

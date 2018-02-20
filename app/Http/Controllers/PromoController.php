@@ -46,6 +46,7 @@ class PromoController extends Controller
          */
         $data['promoData'] = $this->promo->getCollection();
         $data['promoManagementTab'] = "active open";
+        $data['roleData'] = $this->role->getCollection();
         $data['promoTab'] = "active";
         return view('promo.promolist', $data);
     }

@@ -31,7 +31,7 @@
     {{--<link rel="stylesheet" type="text/css" href="{{url('css/plugins/jquery.dataTables.min.css')}}" />--}}
     <link rel="stylesheet" type="text/css" href="{{url('css/plugins/dataTables.bootstrap.min.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{url('css/plugins/jquery.loadmask.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{url('css/plugins/responsive.dataTables.min.css')}}" />
+    {{--<link rel="stylesheet" type="text/css" href="{{url('css/plugins/responsive.dataTables.min.css')}}" />--}}
     <link rel="stylesheet" type="text/css" href="{{url('css/plugins/select.dataTables.min.css')}}" />
     <link rel="stylesheet" href="{{url('css/style.css')}}" type="text/css" />
     <link rel="stylesheet" href="{{url('css/custom.css')}}" type="text/css" />
@@ -82,7 +82,7 @@
 <script src="{{url('js/plugins/jquery.dataTables.min.js')}}" type="text/javascript"></script>
 <script src="{{url('js/plugins/dataTables.bootstrap.min.js')}}" type="text/javascript"></script>
 <script src="{{url('js/plugins/dataTables.buttons.js')}}" type="text/javascript"></script>
-<script src="{{url('js/plugins/dataTables.responsive.min.js')}}" type="text/javascript"></script>
+{{--<script src="{{url('js/plugins/dataTables.responsive.min.js')}}" type="text/javascript"></script>--}}
 <script src="{{url('js/plugins/dataTables.select.min.js')}}" type="text/javascript"></script>
 <script src="{{url('js/plugins/jquery.loadmask.min.js')}}" type="text/javascript"></script>
 

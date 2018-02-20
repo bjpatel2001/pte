@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Enquiry;
 use App\Models\Role;
+use Excel;
 
 class EnquiryController extends Controller
 {
@@ -90,7 +91,19 @@ class EnquiryController extends Controller
         if($request['filterExport']['export_excel'] == 0) {
             $enquiryData = $enquiryData->GetEnquiryData($request);
         }else {
-            $enquiryExcelData = $enquiryData->GetFilteredEnquiryData($request);
+            $excelraw = $enquiryData->GetFilteredEnquiryData($request);
+            $excelData = array();
+            foreach ($excelraw as $excelraw) {
+                $row = array();
+                $row[] = $excelraw->email;
+                $row[] = $excelraw->name;
+                $row[] = $excelraw->mobile;
+                $row[] = $excelraw->number_of_voucher;
+                $row[] = $excelraw->rate;
+                $row[] = $excelraw->payment_request_id;
+                $excelData[] = $row;
+            }
+
         }
                 //scopeGetFilteredEnquiryData
 
@@ -111,6 +124,7 @@ class EnquiryController extends Controller
             'recordsTotal' => $enquiryCount,
             'recordsFiltered' => $enquiryCount,
             'data' => $appData,
+            'excel' => $excelData,
         ];
     }
 

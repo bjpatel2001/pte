@@ -8,10 +8,11 @@ app.dataTable = {
     settings: function (param) {
         $.fn.dataTable.ext.errMode = 'none';
         dataTable = $(param.id).DataTable({
-            responsive: {
+           /* responsive: {
                 details: false
             },
-            "bAutowidth": false,
+            "scrollX": true,
+            "bAutowidth": false,*/
             "info": true,
             "filter": false,
             "bLengthChange": true,

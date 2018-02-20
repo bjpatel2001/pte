@@ -15888,4 +15888,7 @@ form.dropzone .note {
 .lg-mb-0 {
 	margin-bottom: 0!important
 }
+.dataTables_wrapper {
+	overflow-x: scroll;
+}
 }
