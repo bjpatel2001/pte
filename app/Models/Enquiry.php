@@ -167,14 +167,18 @@ class Enquiry extends Authenticatable
     {
 
         $enquiry = new Enquiry;
-
+        if(isset($models['payment_request_id']) && !empty($models['payment_request_id'])) {
+            $payment_request_id = $models['payment_request_id'];
+        }else {
+            $payment_request_id = 'OFFLINE';
+        }
         $enquiry->email = $models['email'];
         $enquiry->name = $models['name'];
         $enquiry->mobile = $models['mobile'];
         $enquiry->number_of_voucher = $models['number_of_voucher'];
         $enquiry->rate = $models['rate'];
         $enquiry->state = $models['state'];
-        $enquiry->payment_request_id = $models['payment_request_id'];
+        $enquiry->payment_request_id = $payment_request_id;
         $enquiry->created_at = date('Y-m-d H:i:s');
         $enquiry->created_by = 1;
 

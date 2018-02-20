@@ -203,22 +203,120 @@ class OfflinePayment extends Authenticatable
 
         ]);
 
-        //send the voucher and whole cycle of adding the payment and sending voucher
-        if($payment) {
-            $models_data = [];
-            $models_data['user_id'] = $payment->id;
-            $models_data['number_of_voucher'] = $models['number_of_voucher'];
-            $models_data['rate'] = $models['rate'];
-            $models_data['payment_id'] = $payment->payment_id;
-            $this->storeExistingAgentPayment($models_data);
+        //For Storing the Enquiry first
+        $enquiry = new Enquiry();
+        $enquiry_data = $enquiry->addEnquiry($models);
+
+        $saleData = new SaleData();
+
+        $models['enquiry_id'] = $enquiry_data->id;
+        //Get the voucher for sending to the customer
+
+        $promo_voucher = new Promo();
+        //getting voucher and adding the entry to the table
+        $buying_quantity = intval($models['number_of_voucher']);
+        //$addpromo = $this->promo->a$modelsddPromo($request->all());
+        $unused_voucher = $promo_voucher->getUnusedVoucher();
+        if ($buying_quantity > $unused_voucher) {
+            return false;
+        }
+        $voucher_id = [];
+        $voucher_data = $promo_voucher->getVoucherByCount($models['number_of_voucher']);
+
+        if (count($voucher_data) > 0) {
+            foreach ($voucher_data as $voucher) {
+                $voucher_id[] = $voucher->id;
+                $request_promo = [];
+                $request_promo['status'] = 2;
+                $request_promo['id'] = $voucher->id;
+                $promo_voucher->updateStatus($request_promo);
+            }
         }else {
             return false;
         }
-         if ($payment) {
-            return $payment;
-        } else {
-            return false;
+        $voucher_id = implode(",", $voucher_id);
+        $models['voucher_id'] = $voucher_id;
+        $models['amount'] = $models['rate'] * $models['number_of_voucher'] ;
+        $pending_voucher = new PendingVoucher();
+        //For adding the voucher code to the mediator table
+        $request_pending_data = [];
+        $request_pending_data['voucher_id'] = $voucher_id;
+        $request_pending_data['enquiry_id'] = $enquiry_data->id;
+        $pending_voucher->addPendingVoucher($request_pending_data);
+
+
+        $pending_voucher_detail = $pending_voucher->getPendingVoucherByField($enquiry_data->id, 'enquiry_id');
+        if (count($pending_voucher_detail) > 0) {
+
+            //Voucher to send in the mail
+            $voucher_to_send = [];
+            $voucher_id = explode(",", $pending_voucher_detail->voucher_id);
+            foreach ($voucher_id as $voucher) {
+                $update_voucher_data = [];
+                $update_voucher_data['status'] = 1;
+                $update_voucher_data['id'] = $voucher;
+                $voucher_data = $promo_voucher->getPromoByField($voucher,'id');
+                if(!empty($voucher_data)) {
+                    $voucher_to_send[] = $voucher_data->voucher_code;
+                }
+                $promo_voucher->updateStatus($update_voucher_data);
+            }
+
+            // For deleteing the entries from the pending_voucher table
+            $pending_voucher->deletePendingVoucher($enquiry_data->id,'enquiry_id');
+            //Prepare data for email sending to Customer
+
+            $customer_email_data = [];
+            $customer_email_data['email'] = $models['email'];
+            $customer_email_data['name'] = $models['name'];
+            $customer_email_data['mobile'] = $models['mobile'];
+            $customer_email_data['amount_paid'] = $models['amount'];
+            $customer_email_data['payment_id'] = $models['payment_id'];
+            $customer_email_data['voucher_to_send'] = implode(",", $voucher_to_send);
+            $customer_email_data['date'] = date('d-m-Y');
+            $customer_email_data['type'] = 'customer';
+            Mail::send(new SuccessMail($customer_email_data));
+            //Prepare data for admin
+            sleep(2);
+            $admin_email_data = [];
+            $admin_email_data['email'] = $models['email'];
+            $admin_email_data['name'] = $models['name'];
+            $admin_email_data['mobile'] = $models['mobile'];
+            $admin_email_data['payment_id'] = $models['payment_id'];
+            $admin_email_data['amount_paid'] = $models['amount'];
+            $admin_email_data['number_of_voucher'] = $models['number_of_voucher'];
+            $admin_email_data['instamojo_fee'] = 'NONE';
+            $admin_email_data['date'] = date('d-m-Y');
+            $admin_email_data['type'] = 'admin';
+            $admin_email_data['voucher_to_send'] = implode(",", $voucher_to_send);
+            Mail::send(new SuccessMail($admin_email_data));
+
+            sleep(2);
+            $mock_test_mail = [];
+            $mock_test_mail['type'] = 'mock_test';
+            $mock_test_mail['email'] = $models['email'];
+            Mail::send(new SuccessMail($mock_test_mail));
+
+            $final_voucher_sms = implode(",", $voucher_to_send);
+            $models['voucher_code'] = $final_voucher_sms;
+            $models['instamojo_fee'] = 'NONE';
+            $models['payment_code'] = 'NONE';
+            $models['amount_paid'] = $models['amount'];
+            // For sending the SMS to customer
+            $this->sendSms($final_voucher_sms,$models['mobile']);
+            $sale_data = $saleData->addSaleData($models);
+
+            if ($sale_data) {
+                return $sale_data;
+            } else {
+                return false;
+            }
+
         }
+        return $payment;
+
+        //send the voucher and whole cycle of adding the payment and sending voucher
+
     }
 
     /**
