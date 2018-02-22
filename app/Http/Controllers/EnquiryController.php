@@ -113,6 +113,7 @@ class EnquiryController extends Controller
             $row[] = $enquirysData->number_of_voucher;
             $row[] = $enquirysData->rate;
             $row[] = $enquirysData->payment_request_id;
+            $row[] = date("d-m-Y H:i:s", strtotime($enquirysData->created_at));
             $appData[] = $row;
         }
 

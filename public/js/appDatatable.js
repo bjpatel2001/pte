@@ -123,6 +123,17 @@ app.dataTable = {
 
                         d.filterDate = filterDate;
 
+                        var filterDate1 = {};
+                        $.each($('input[name^="filterDate1\\["]').serializeArray(), function () {
+                            if ($.trim(this.value) !== '') {
+                                var name = this.name.replace(/filterDate1\[/, '');
+                                name = name.replace(/\]/, '');
+                                filterDate1[name] = this.value;
+                            }
+                        });
+
+                        d.filterDate1 = filterDate1;
+
                         var filterSelect = {};
                         $.each($('select[name^="filterSelect\\["]').serializeArray(), function () {
                             if ($.trim(this.value) !== '') {
@@ -131,8 +142,6 @@ app.dataTable = {
                                 filterSelect[name] = this.value;
                             }
                         });
-
-                        d.filterExport = filterExport;
 
                         var filterExport = {};
                         $.each($('input[name^="filterExport\\["]').serializeArray(), function () {

@@ -57,6 +57,8 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="panel panel-default panel-table">
+                                <label>TO:</label> <input type="text" name="filterDate[tbl_purchase_data.purchase_date]" id="date1" style="width: 100px;" value="" />
+                                <label>FROM:</label> <input type="text" name="filterDate1[tbl_purchase_data.purchase_date]" id="date2" style="width: 100px;" value="" />
                                 <div class="panel-body">
                                     <table id="dataTable"
                                            class="table display dt-responsive responsive nowrap table-striped table-hover table-fw-widget"
@@ -114,7 +116,12 @@
 <script src="{{url('js/modules/purchasedata.js')}}"></script>
 @endpush
 @push('internalJsLoad')
+
 <script>
+    $( function() {
+        $( "#date1" ).datepicker({dateFormat: 'dd-mm-yy'});
+        $( "#date2" ).datepicker({dateFormat: 'dd-mm-yy'});
+    } );
     app.purchasedata.init();
     $(document).ready(function () {
         $(document).on('click', '.export', function () {

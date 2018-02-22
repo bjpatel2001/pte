@@ -92,6 +92,7 @@ class Enquiry extends Authenticatable
     {
         $filter = $request->filter;
         $Datefilter = $request->filterDate;
+        $Datefilter1 = $request->filterDate1;
         $filterSelect = $request->filterSelect;
 
         /**
@@ -101,7 +102,7 @@ class Enquiry extends Authenticatable
          *
          * @return mixed
          */
-        return $query->Where(function ($query) use ($filter, $Datefilter, $filterSelect) {
+        return $query->Where(function ($query) use ($filter, $Datefilter, $filterSelect,$Datefilter1) {
             if (count($filter) > 0) {
                 foreach ($filter as $key => $value) {
                     if ($value != "") {
@@ -110,10 +111,22 @@ class Enquiry extends Authenticatable
                 }
             }
 
-            if (count($Datefilter) > 0) {
+           /* if (count($Datefilter) > 0) {
                 foreach ($Datefilter as $dtkey => $dtvalue) {
                     if ($dtvalue != "") {
                         $query->where($dtkey, 'LIKE', '%' . date('Y-m-d', strtotime(trim($dtvalue))) . '%');
+                    }
+                }
+            }*/
+
+            if (count($Datefilter) > 0) {
+                foreach ($Datefilter as $dtkey => $dtvalue) {
+                    foreach ($Datefilter1 as $dtvalue1){
+                        if ($dtvalue != "" && $dtvalue1 !="") {
+                            $start_date = date('Y-m-d 00:00:00', strtotime(trim($dtvalue)));
+                            $end_date = date('Y-m-d 23:59:59', strtotime(trim($dtvalue1)));
+                            $query->whereBetween($dtkey,[$start_date,$end_date]);
+                        }
                     }
                 }
             }

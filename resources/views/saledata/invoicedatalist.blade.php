@@ -52,6 +52,8 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="panel panel-default panel-table">
+                                <label>TO:</label> <input type="text" name="filterDate[tbl_sale_data.created_at]" id="date1" style="width: 100px;" value="" />
+                                <label>FROM:</label> <input type="text" name="filterDate1[tbl_sale_data.created_at]" id="date2" style="width: 100px;" value="" />
                                 <div class="panel-body">
                                     <table id="dataTable"
                                            class="table display dt-responsive responsive nowrap table-striped table-hover table-fw-widget"
@@ -125,6 +127,12 @@
 
 @endpush
 @push('internalJsLoad')
+<script>
+    $( function() {
+        $( "#date1" ).datepicker({dateFormat: 'dd-mm-yy'});
+        $( "#date2" ).datepicker({dateFormat: 'dd-mm-yy'});
+    } );
+</script>
 <script>
     app.saledata.init_invoice();
     $(document).ready(function () {

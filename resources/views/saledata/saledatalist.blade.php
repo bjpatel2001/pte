@@ -45,8 +45,8 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="panel panel-default panel-table">
-                                <input type="text" name="filterDate[tbl_sale_data.created_at]" id="date1" style="width: 100px;" value="" />
-                                <input type="text" name="filterExport[tbl_sale_data.created_at]" id="date2" style="width: 100px;" value="" />
+                               <label>TO:</label> <input type="text" name="filterDate[tbl_sale_data.created_at]" id="date1" style="width: 100px;" value="" />
+                                <label>FROM:</label> <input type="text" name="filterDate1[tbl_sale_data.created_at]" id="date2" style="width: 100px;" value="" />
                                 <div class="panel-body">
                                     <table id="dataTable"
                                            class="table display dt-responsive responsive nowrap table-striped table-hover table-fw-widget"

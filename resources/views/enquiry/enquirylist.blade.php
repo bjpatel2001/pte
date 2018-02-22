@@ -51,6 +51,8 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="panel panel-default panel-table">
+                                <label>TO:</label> <input type="text" name="filterDate[tbl_enquiry.created_at]" id="date1" style="width: 100px;" value="" />
+                                <label>FROM:</label> <input type="text" name="filterDate1[tbl_enquiry.created_at]" id="date2" style="width: 100px;" value="" />
                                 <div class="panel-body">
                                     <table id="dataTable"
                                            class="table display dt-responsive responsive nowrap table-striped table-hover table-fw-widget"
@@ -77,6 +79,7 @@
                                             <th>Number Of Voucher</th>
                                             <th>Rate</th>
                                             <th>Payment Request Id</th>
+                                            <th>Enquiry Date</th>
                                         </tr>
 
                                         </thead>
@@ -106,9 +109,12 @@
                                                 <input type="text" name="filter[payment_request_id]" style="width: 80px;" id="
                                                        payment_request_id" value="" />
                                             </th>
+                                            <th>
+
+                                            </th>
 
                                             <input type="hidden" name="filterExport[export_excel]"  id="export_excel" value="0" />
-                                            <th></th>
+
                                         </tr>
                                         </thead>
 
@@ -133,7 +139,11 @@
 @push('internalJsLoad')
 <script>
     app.enquiry.init();
-
+    $( function() {
+        $( "#date" ).datepicker({dateFormat: 'dd-mm-yy'});
+        $( "#date1" ).datepicker({dateFormat: 'dd-mm-yy'});
+        $( "#date2" ).datepicker({dateFormat: 'dd-mm-yy'});
+    } );
     $(document).ready(function () {
         $(document).on('click', '.export', function () {
             $('#export_excel').val('1');
