@@ -80,6 +80,10 @@ class SaleData extends Authenticatable
         return $query->skip($request->start)->take($request->length)->get();
     }
 
+    public function scopeGetFilteredSaleData($query)
+    {
+        return $query->get();
+    }
     /**
      * scopeGetFilteredData from App/Models/SaleData
      * get filterred saledatas
@@ -93,6 +97,7 @@ class SaleData extends Authenticatable
         $filter = $request->filter;
         $Datefilter = $request->filterDate;
         $filterSelect = $request->filterSelect;
+
 
         /**
          * @param string $filter  text type value
@@ -117,6 +122,16 @@ class SaleData extends Authenticatable
                     }
                 }
             }
+
+           /* if (count($Datefilter) > 0) {
+                foreach ($Datefilter as $dtkey => $dtvalue) {
+                    foreach ($filterExport as $dtkey1 => $dtvalue1) {
+                        if ($dtvalue != "") {
+                            $query->where($dtkey, 'BETWEEN' .date('Y-m-d', strtotime(trim($dtvalue))).'AND'.date('Y-m-d', strtotime(trim($dtvalue1))) );
+                        }
+                    }
+                }
+            }*/
 
             if (count($filterSelect) > 0) {
                 foreach ($filterSelect as $Sekey => $Sevalue) {

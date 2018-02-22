@@ -138,6 +138,7 @@
         $(document).on('click', '.export', function () {
             $('#export_excel').val('1');
             dataTable.ajax.reload();
+            $('#export_excel').val('0');
         });
 
     });

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Enquiry;
 use App\Models\Role;
 use Excel;
+use Carbon\Carbon;
 
 class EnquiryController extends Controller
 {
@@ -88,23 +89,19 @@ class EnquiryController extends Controller
          * @return mixed
          */
 
+        $url = '';
         if($request['filterExport']['export_excel'] == 0) {
             $enquiryData = $enquiryData->GetEnquiryData($request);
         }else {
-            $excelraw = $enquiryData->GetFilteredEnquiryData($request);
-            $excelData = array();
-            foreach ($excelraw as $excelraw) {
-                $row = array();
-                $row[] = $excelraw->email;
-                $row[] = $excelraw->name;
-                $row[] = $excelraw->mobile;
-                $row[] = $excelraw->number_of_voucher;
-                $row[] = $excelraw->rate;
-                $row[] = $excelraw->payment_request_id;
-                $excelData[] = $row;
-            }
+            $excelraw = $enquiryData->GetFilteredEnquiryData();
+            $enquiryData = $enquiryData->GetFilteredEnquiryData();
+           $file_name =  $this->generateExcel($excelraw);
+           if(!empty($file_name)) {
+            $url = $file_name['file'];
+           }
 
         }
+
                 //scopeGetFilteredEnquiryData
 
         $appData = array();
@@ -119,17 +116,63 @@ class EnquiryController extends Controller
             $appData[] = $row;
         }
 
-        return [
-            'draw' => $request->draw,
-            'recordsTotal' => $enquiryCount,
-            'recordsFiltered' => $enquiryCount,
-            'data' => $appData,
-            'excel' => $excelData,
-        ];
+            $return_data = [
+                'draw' => $request->draw,
+                'recordsTotal' => $enquiryCount,
+                'recordsFiltered' => $enquiryCount,
+                'data' => $appData,
+
+
+            ];
+
+        if($request['filterExport']['export_excel'] == 1) {
+            $return_data['url'] = $url;
+        }
+        return $return_data;
     }
 
-  
+    /**
+     * generate the excel sheet
+     * */
+    public function generateExcel($data)
+    {
+        $appData = array();
+        foreach ($data as $requestData) {
+            $row['Email'] = $requestData->email;
+            $row['Name'] = $requestData->name;
+            $row['Mobile'] = $requestData->mobile;
+            $row['Number Of Voucher'] = $requestData->number_of_voucher;
+            $row['Rate'] = $requestData->rate;
+            $row['Payment Request Id'] = $requestData->payment_request_id;
+            $appData[] = $row;
+        }
 
+        if (!empty($appData)) {
+
+            $file_name = rand();
+            $storage_path = Excel::create($file_name, function($excel) use($appData) {
+                $excel->sheet('Sheet 1', function($sheet) use($appData) {
+                    $sheet->fromArray($appData);
+                });
+            })->store('xls',false,true);
+            return $storage_path;
+        }
+
+        return false;
+
+    }
+
+    /*
+         * Download the file
+         * */
+
+    public function downloadfile(Request $request)
+    {
+
+        $file_name =  $request->file_name;
+        $path = storage_path('exports/'.$file_name);
+        return response()->download($path);
+    }
 
 
 }

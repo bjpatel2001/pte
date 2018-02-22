@@ -9,6 +9,7 @@ use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use DB;
+use Excel;
 
 class PurchaseDataController extends Controller
 {
@@ -89,7 +90,19 @@ class PurchaseDataController extends Controller
          * @param  \Illuminate\Http\Request $request
          * @return mixed
          */
-        $purchasedataData = $purchasedataData->GetPurchaseDataData($request);
+
+        $url = '';
+        if($request['filterExport']['export_excel'] == 0) {
+            $purchasedataData = $purchasedataData->GetPurchaseDataData($request);
+        }else {
+            $excelraw = $purchasedataData->GetFilteredPurchaseData();
+            $purchasedataData = $purchasedataData->GetFilteredPurchaseData();
+            $file_name =  $this->generateExcel($excelraw);
+            if(!empty($file_name)) {
+                $url = $file_name['file'];
+            }
+
+        }
         $appData = array();
         $i = 1;
         foreach ($purchasedataData as $purchasedataData) {
@@ -108,12 +121,52 @@ class PurchaseDataController extends Controller
             $i++;
         }
 
-        return [
+        $return_data = [
             'draw' => $request->draw,
             'recordsTotal' => $purchasedataCount,
             'recordsFiltered' => $purchasedataCount,
             'data' => $appData,
+
+
         ];
+
+        if($request['filterExport']['export_excel'] == 1) {
+            $return_data['url'] = $url;
+        }
+        return $return_data;
+    }
+
+    /**
+     * generate the excel sheet
+     * */
+    public function generateExcel($data)
+    {
+        $appData = array();
+        foreach ($data as $requestData) {
+            $row['Invoice Date'] = date("d-m-Y", strtotime($requestData->purchase_date));
+            $row['Payment Made Date'] = date("d-m-Y", strtotime($requestData->received_date));
+            $row['Invoice Number'] = $requestData->invoice_number;
+            $row['RTGS Number'] = $requestData->rtgs;
+            $row['Narration'] = $requestData->narration;
+            $row['Quantity'] = $requestData->quantity;
+            $row['Per Voucher Prize'] = $requestData->per_voucher_prize;
+            $row['Total Amount'] = $requestData->total_amount;
+            $appData[] = $row;
+        }
+
+        if (!empty($appData)) {
+
+            $file_name = rand();
+            $storage_path = Excel::create($file_name, function($excel) use($appData) {
+                $excel->sheet('Sheet 1', function($sheet) use($appData) {
+                    $sheet->fromArray($appData);
+                });
+            })->store('xls',false,true);
+            return $storage_path;
+        }
+
+        return false;
+
     }
 
     /**

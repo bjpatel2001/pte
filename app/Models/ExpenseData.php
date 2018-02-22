@@ -73,6 +73,11 @@ class ExpenseData extends Authenticatable
         return $query->skip($request->start)->take($request->length)->get();
     }
 
+    public function scopeGetFilteredExpenseData($query)
+    {
+        return $query->get();
+    }
+
     /**
      * scopeGetFilteredData from App/Models/ExpenseData
      * get filterred expensedatas

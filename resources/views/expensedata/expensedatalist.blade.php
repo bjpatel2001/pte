@@ -29,18 +29,23 @@
                 <div class="row">
                     <div class="col-sm-12 col-xs-12">
                         <div class="activity-but activity-space pull-left">
-                            {{--<div class="pull-left">
+                            <div class="pull-left">
                                 <a href="javascript:void(0);" class="btn btn-warning func_SearchGridData"><i
                                             class="icon mdi mdi-search"></i> Search</a>
                             </div>
                             <div class="pull-left">
                                 <a href="javascript:void(0);" class="btn btn-danger func_ResetGridData"
                                    style="margin-left: 10px;">Reset</a>
-                            </div>--}}
+                            </div>
                             <div class="addreport pull-right">
                                 <a href="{{url('/expense/add')}}">
                                     <button class="btn btn-space btn-primary"><i
                                                 class="icon mdi mdi-plus "></i> {{trans('app.add')}} entry
+                                    </button>
+                                </a>
+                                <a href="javascript:void(0);" class="export">
+                                    <button class="btn btn-space btn-primary"><i
+                                                class="icon mdi mdi-plus "></i> Export
                                     </button>
                                 </a>
                             </div>
@@ -88,6 +93,7 @@
                                             <th></th>
                                             <th></th>
                                             <th></th>
+                                            <input type="hidden" name="filterExport[export_excel]"  id="export_excel" value="0" />
                                         </tr>
                                         </thead>
 
@@ -113,5 +119,13 @@
 @push('internalJsLoad')
 <script>
     app.expensedata.init();
+    $(document).ready(function () {
+        $(document).on('click', '.export', function () {
+            $('#export_excel').val('1');
+            dataTable.ajax.reload();
+            $('#export_excel').val('0');
+        });
+
+    });
 </script>
 @endpush

@@ -9,6 +9,7 @@ use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use DB;
+use Excel;
 
 class ExpenseDataController extends Controller
 {
@@ -89,10 +90,22 @@ class ExpenseDataController extends Controller
          * @param  \Illuminate\Http\Request $request
          * @return mixed
          */
-        $expensedataData = $expensedataData->GetExpenseDataData($request);
+
+        $url = '';
+        if($request['filterExport']['export_excel'] == 0) {
+            $expensedataData = $expensedataData->GetExpenseDataData($request);
+        }else {
+            $excelraw = $expensedataData->GetFilteredExpenseData();
+            $expensedataData = $expensedataData->GetFilteredExpenseData();
+            $file_name =  $this->generateExcel($excelraw);
+            if(!empty($file_name)) {
+                $url = $file_name['file'];
+            }
+
+        }
+
         $appData = array();
         $i = 1;
-
         foreach ($expensedataData as $expensedataData) {
             $row = array();
             $row[] = $i;
@@ -111,12 +124,52 @@ class ExpenseDataController extends Controller
             $i++;
         }
 
-        return [
+        $return_data =  [
             'draw' => $request->draw,
             'recordsTotal' => $expensedataCount,
             'recordsFiltered' => $expensedataCount,
             'data' => $appData,
         ];
+
+        if($request['filterExport']['export_excel'] == 1) {
+            $return_data['url'] = $url;
+        }
+        return $return_data;
+    }
+
+    /**
+     * generate the excel sheet
+     * */
+    public function generateExcel($data)
+    {
+        $appData = array();
+        foreach ($data as $requestData) {
+            $row['Invoice Date'] = date("d-m-Y", strtotime($requestData->invoice_date));
+            $row['Payment Date'] = date("d-m-Y", strtotime($requestData->date));
+            $row['Invoice No'] = $requestData->invoice_number;
+            $row['Name'] = $requestData->name;
+            $row['Narration'] = $requestData->detail;
+            $row['GSTN'] = $requestData->gstn;
+            $row['HSN/SAC'] = $requestData->hsn_sac ;
+            $row['Before GST'] = $requestData->before_gst;
+            $row['GST Rs'] = $requestData->gst;
+            $row['After GST'] = $requestData->after_gst;
+            $appData[] = $row;
+        }
+
+        if (!empty($appData)) {
+
+            $file_name = rand();
+            $storage_path = Excel::create($file_name, function($excel) use($appData) {
+                $excel->sheet('Sheet 1', function($sheet) use($appData) {
+                    $sheet->fromArray($appData);
+                });
+            })->store('xls',false,true);
+            return $storage_path;
+        }
+
+        return false;
+
     }
 
     /**

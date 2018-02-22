@@ -12,6 +12,8 @@
 */
 
 Auth::routes();
+
+
 Route::get('/', 'Auth\LoginController@welcome');
 Route::get('/how-to-book', 'Auth\LoginController@howToBook');
 Route::get('/pte-faq', 'Auth\LoginController@pteFaq');
@@ -44,6 +46,8 @@ Route::get('/maintanance', function (){
  * */
 
 Route::get('/dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
+
+
 
 
 
@@ -144,6 +148,7 @@ Route::group(['prefix' => 'expense'], function () {
 Route::group(['prefix' => 'enquiry'], function () {
 
     Route::any('/list', 'EnquiryController@index');
+    Route::get('/download/{file_name}','EnquiryController@downloadfile');
     Route::post('/datatable', 'EnquiryController@datatable');
 });
 

@@ -73,6 +73,10 @@ class PurchaseData extends Authenticatable
         return $query->skip($request->start)->take($request->length)->get();
     }
 
+    public function scopeGetFilteredPurchaseData($query)
+    {
+        return $query->get();
+    }
     /**
      * scopeGetFilteredData from App/Models/PurchaseData
      * get filterred purchasedatas

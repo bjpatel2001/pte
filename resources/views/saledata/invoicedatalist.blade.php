@@ -37,6 +37,13 @@
                                 <a href="javascript:void(0);" class="btn btn-danger func_ResetGridData"
                                    style="margin-left: 10px;">Reset</a>
                             </div>
+                            <div class="addreport pull-right">
+                                <a href="javascript:void(0);" class="export">
+                                    <button class="btn btn-space btn-primary"><i
+                                                class="icon mdi mdi-plus "></i> Export
+                                    </button>
+                                </a>
+                            </div>
 
                         </div>
                     </div>
@@ -92,7 +99,7 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
-                                            
+                                            <input type="hidden" name="filterExport[export_excel]"  id="export_excel" value="0" />
                                         </tr>
                                         </thead>
 
@@ -120,5 +127,13 @@
 @push('internalJsLoad')
 <script>
     app.saledata.init_invoice();
+    $(document).ready(function () {
+        $(document).on('click', '.export', function () {
+            $('#export_excel').val('1');
+            dataTable.ajax.reload();
+            $('#export_excel').val('0');
+        });
+
+    });
 </script>
 @endpush

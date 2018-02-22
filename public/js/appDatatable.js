@@ -145,6 +145,14 @@ app.dataTable = {
 
                         d.filterExport = filterExport;
 
+                    },
+                    complete:function (response) {
+
+                        var data = $.parseJSON(response.responseText);
+                        if(typeof data.url != 'undefined' && data.url != '') {
+
+                            window.location = app.config.SITE_PATH+'enquiry/download/'+data.url;
+                        }
                     }
                 }
             });

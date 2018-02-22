@@ -12,7 +12,7 @@ use Event;
 use Hash;
 use App\Events\SendMail;
 use DB;
-
+use Excel;
 class SaleDataController extends Controller
 {
 
@@ -170,13 +170,27 @@ class SaleDataController extends Controller
             $saledataData = $saledataData->SortDefaultDataByRaw('tbl_sale_data.created_at', 'desc');
         }
 
+
         /**
          * get paginated collection of saledata
          *
          * @param  \Illuminate\Http\Request $request
          * @return mixed
          */
-        $saledataData = $saledataData->GetSaleDataData($request);
+        //$saledataData = $saledataData->GetSaleDataData($request);
+
+        $url = '';
+        if($request['filterExport']['export_excel'] == 0) {
+            $saledataData = $saledataData->GetSaleDataData($request);
+        }else {
+            $excelraw = $saledataData->GetFilteredSaleData();
+            $saledataData = $saledataData->GetSaleDataData($request);
+            $file_name =  $this->generateExcel($excelraw);
+            if(!empty($file_name)) {
+                $url = $file_name['file'];
+            }
+
+        }
 
         $appData = array();
         foreach ($saledataData as $saledataData) {
@@ -203,13 +217,60 @@ class SaleDataController extends Controller
             $appData[] = $row;
         }
 
-        return [
+
+        $return_data =  [
             'draw' => $request->draw,
             'recordsTotal' => $saledataCount,
             'recordsFiltered' => $saledataCount,
             'data' => $appData,
         ];
+        if($request['filterExport']['export_excel'] == 1) {
+            $return_data['url'] = $url;
+        }
+        return $return_data;
+
     }
 
+    /**
+     * generate the excel sheet
+     * */
+    public function generateExcel($data)
+    {
+        $appData = array();
+        foreach ($data as $requestData) {
+            $amount_paid = $requestData->amount_paid;
+            $row['Date'] = date("d-m-Y H:i:s", strtotime($requestData->created_at));
+            $row['Invoice No'] = $requestData->invoice_number;
+            $row['Name'] = (isset($requestData->Enquiry)) ? $requestData->Enquiry->name : "---";
+            $row['Email'] = (isset($requestData->Enquiry)) ? $requestData->Enquiry->email : "---";
+            $row['Mobile'] = (isset($requestData->Enquiry)) ? $requestData->Enquiry->mobile : "---";
+            $row['GSTN'] = $requestData->client_gstn;
+            $row['HSN/SAC'] = 'HSN/SAC';
+            $row['Voucher'] = $requestData->voucher_code;
+            $row['Number Of Voucher'] = $requestData->number_of_voucher;
+            $row['Transaction Id'] = $requestData->payment_code;
+            $row['Before GST'] = $amount_paid - ($requestData->amount_paid * 0.18);
+            $row['SGST'] = (isset($requestData->Enquiry) && $requestData->Enquiry->state == 5) ? 'SGST:'.$amount_paid * 0.09 : '-' ;
+            $row['CGST'] = (isset($requestData->Enquiry) && $requestData->Enquiry->state == 5) ? 'CGST:'.$amount_paid * 0.09 : '-' ;
+            $row['IGST'] = (isset($requestData->Enquiry) && $requestData->Enquiry->state == 5) ? '-' :  'IGST:' .$amount_paid * 0.18;
+            $row['After GST'] = $requestData->amount_paid;
+            $row['State'] =  $requestData->state ;
+            $appData[] = $row;
+        }
+
+        if (!empty($appData)) {
+
+            $file_name = rand();
+            $storage_path = Excel::create($file_name, function($excel) use($appData) {
+                $excel->sheet('Sheet 1', function($sheet) use($appData) {
+                    $sheet->fromArray($appData);
+                });
+            })->store('xls',false,true);
+            return $storage_path;
+        }
+
+        return false;
+
+    }
 
 }
