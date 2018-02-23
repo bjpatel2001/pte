@@ -58,10 +58,10 @@ class DashboardController extends Controller
             ->responsive(true)
             ->dimensions(20,500);
 
-        $today_conversion_rate = $today_sale / $today_enquiry * 100;
-        $last_day_conversion_rate = $last_day_sale / $last_day_enquiry * 100;
-        $last_week_conversion_rate = $last_week_sale / $last_week_enquiry * 100;
-        $last30_days_conversion_rate = $last_30_days_sale / $last_30_days * 100;
+        $today_conversion_rate = ($today_enquiry > 0) ? $today_sale / $today_enquiry * 100 : 0 ;
+        $last_day_conversion_rate = ($last_day_enquiry > 0) ? $last_day_sale / $last_day_enquiry * 100 : 0 ;
+        $last_week_conversion_rate = ($last_week_enquiry > 0) ? $last_week_sale / $last_week_enquiry * 100 : 0 ;
+        $last30_days_conversion_rate = ($last_30_days > 0) ? $last_30_days_sale / $last_30_days * 100 : 0 ;
 
         $ratio = Charts::create('bar', 'highcharts')
             ->title('Conversion Rate')
