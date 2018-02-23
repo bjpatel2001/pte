@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="{{url('css/style.css')}}" type="text/css" />
     <link rel="stylesheet" href="{{url('css/custom.css')}}" type="text/css" />
     <link rel="stylesheet" href="{{url('css/plugins/font-awesome.min.css')}}" type="text/css" />
+    {!! Charts::styles() !!}
+    {!! Charts::scripts() !!}
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -90,6 +93,7 @@
 <script src="{{url('js/main.js')}}" type="text/javascript"></script>
 <script src="{{url('js/app.js')}}" type="text/javascript"></script>
 <script src="{{url('js/plugins/validate/jquery.validate.min.js')}}" type="text/javascript"></script>
+
 @stack('externalJsLoad')
 @stack('internalJsLoad')
 <script>

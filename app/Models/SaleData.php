@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use DB;
+use Carbon\Carbon;
 
 
 
@@ -300,6 +301,67 @@ class SaleData extends Authenticatable
             $invoice_number = 'INV_'.$current_year.'_1';
             return $invoice_number;
         }
+    }
+
+    /**
+     * Get the Daily Enquiry Data
+     *
+     * @return $count
+     * */
+
+    public function getDailyEnquiryCount()
+    {
+        $count = SaleData::whereDate('created_at', '=', date('Y-m-d'))->count();
+        return $count;
+    }
+
+    /**
+     * Get the Daily Enquiry Data
+     *
+     * @return $count
+     */
+
+    public function getLastDayEnquiryCount()
+    {
+        $start_date_raw =  Carbon::now();
+        $start_date = $start_date_raw->toDateTimeString();
+        $end_date = date('Y-m-d 23:59:59', strtotime(trim("-1 days")));
+        //$result = DB::select("select * from tbl_enquiry WHERE created_at BETWEEN '".$end_date."' and '$start_date' ");
+        $count = SaleData::whereBetween('created_at',[$end_date,$start_date])->count();
+        return $count;
+    }
+
+    /**
+     * Get the Daily Enquiry Data
+     *
+     * @return $count
+     */
+
+    public function getLastWeekEnquiryCount()
+    {
+        $start_date_raw =  Carbon::now();
+        $start_date = $start_date_raw->toDateTimeString();
+        $end_date = date('Y-m-d', strtotime(trim("-7 days")));
+        /*$result = DB::select("select * from tbl_enquiry WHERE created_at BETWEEN '".$end_date."' and '$start_date' ");
+        dd($result);*/
+        $count = SaleData::whereBetween('created_at',[$end_date,$start_date])->count();
+        return $count;
+    }
+
+    /**
+     * Get the 30 Days Count
+     *
+     * @return $count
+     */
+
+    public function last30DaysCount()
+    {
+        $start_date_raw =  Carbon::now();
+        $start_date = $start_date_raw->toDateTimeString();
+        $end_date = date('Y-m-d 23:59:59', strtotime(trim("-30 days")));
+
+        $count = SaleData::whereBetween('created_at',[$end_date,$start_date])->count();
+        return $count;
     }
 
 }
