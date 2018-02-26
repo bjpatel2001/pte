@@ -302,5 +302,17 @@ class Enquiry extends Authenticatable
         return $count;
     }
 
+    /**
+     * Get the 30 Days Count
+     *
+     * @return $count
+     */
+
+    public function allEnquiryCount()
+    {
+        $count = Enquiry::select('tbl_enquiry.*')->count();
+        return $count;
+    }
+
 
 }

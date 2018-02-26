@@ -258,8 +258,6 @@ class AgentController extends Controller
         }
 
         if ($addagent) {
-
-
             $request->session()->flash('alert-success','Entry edited successfully');
             return redirect('agent/list');
         } else {

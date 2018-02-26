@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class=hd style='background-image:{{url('css/front/images/cbg.jpg')}};background-size:cover'>
+    <div class=hd>
         <div class=glass2 style=background:rgba(0,0,0,.6)><h1>Contact Us</h1></div>
     </div>
     <div class=container style="padding:80px 0">

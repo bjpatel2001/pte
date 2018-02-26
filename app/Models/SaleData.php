@@ -364,4 +364,16 @@ class SaleData extends Authenticatable
         return $count;
     }
 
+    /**
+     * Get all Days Count
+     *
+     * @return $count
+     */
+
+    public function allSaleCount()
+    {
+        $count = SaleData::select('tbl_sale_data.*')->count();
+        return $count;
+    }
+
 }
